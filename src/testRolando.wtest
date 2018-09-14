@@ -25,3 +25,26 @@ test "Espectro Malefico cambiado a pepe no es poderoso"{
 test "Hechizo Basico no es poderoso"{
 	assert.notThat(hechizoBasico.poderoso())
 }
+test"2"{
+	assert.equals(collarDivino.lucha(),2)
+}
+test"3"{
+	assert.equals(mascaraOscura.lucha(),5)
+}
+test"NL<NH"{
+	assert.notThat(rolando.luchador())
+}
+test"Nivel de lucha sin artefactos=1"{
+	assert.equals(rolando.sacaArtefacto(),collarDivino)
+	assert.equals(rolando.sacaArtefacto(),espadaDestino)
+	assert.equals(rolando.sacaArtefacto(),mascaraOscura)
+	assert.equals(rolando.lucha(),1)
+}
+test"NL con artefactos=13"{
+	assert.equals(rolando.lucha(),13)
+}
+test"NL con 3 perlas=11"{
+	assert.equals(collarDivino.perlas(3),3)
+	assert.equals(collarDivino.lucha(),3)
+	assert.equals(rolando.lucha(),11)
+}
