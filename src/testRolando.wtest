@@ -1,8 +1,27 @@
 import objetosRolando.*
-test "cuanto nivel de hechiceria tiene rolando" {
+test "Nivel de hechiceria=56" {
 	assert.equals(rolando.nivelDeHechiceria(),56)
 
 }
-
-
-
+test "NH con Espectro Superrecontramalefico muajajaja=125" {
+	assert.equals(espectro.nombre("espectro superrecontramalefico muajajaja"), ("espectro superrecontramalefico muajajaja"))
+	assert.equals(rolando.nivelDeHechiceria(),125)
+}
+test "NH con Hechizo Basico como hechizo preferido=35" {
+	assert.equals(rolando.hechizoPreferido(hechizoBasico),hechizoBasico)
+	assert.equals(rolando.nivelDeHechiceria(),35)
+}
+test "NH con 1 eclipse=61" {
+	assert.equals(fuerzaOscura.eclipse(),10)
+	assert.equals(rolando.nivelDeHechiceria(),61)
+}
+test "Espectro Malefico es poderoso" {
+	assert.that(espectro.poderoso())
+}
+test "Espectro Malefico cambiado a pepe no es poderoso"{
+	assert.equals(espectro.nombre("pepe"), ("pepe"))
+	assert.notThat(espectro.poderoso())
+}
+test "Hechizo Basico no es poderoso"{
+	assert.notThat(hechizoBasico.poderoso())
+}
