@@ -1,7 +1,7 @@
 object rolando{
 	var valorBase=3
 	var hechizoPreferido=espectro
-	var artefactos= #{espadaDestino,collarDivino,mascaraOscura}
+	var artefactos= #{espadaDestino,collarDivino,mascaraOscura, armadura}
 	var luchaBase=1
 	method hechizoPreferido(unHechizoPreferido){
 		hechizoPreferido=unHechizoPreferido
@@ -15,6 +15,7 @@ object rolando{
 	}
 	method luchaBase(unaBase){
 		luchaBase=unaBase
+		return luchaBase
 	}
 	method agregaArtefacto(unArtefacto){
 		artefactos.add(unArtefacto)
@@ -79,7 +80,7 @@ object espadaDestino{
 	}
 }
 object collarDivino{
-	var perlas=0
+	var perlas=5
 	var lucha=perlas
 	method perlas(unasPerlas){
 		perlas=unasPerlas
@@ -93,5 +94,24 @@ object mascaraOscura{
 	var lucha
 	method lucha(){
 		return 1/2 * (fuerzaOscura.poder())
+	}
+}
+object armadura{
+	var lucha=2
+	var refuerzos= #{cotaDeMalla,bendicion,hechizo,ninguno}
+	method lucha(){
+		return lucha
+	}
+}
+object cotaDeMalla{
+	var lucha=1
+	method lucha(){
+		return lucha
+	}
+}
+object bendicion{
+	var lucha
+	method lucha(){
+		return lucha
 	}
 }
