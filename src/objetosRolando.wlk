@@ -34,6 +34,9 @@ object rolando{
 	method seCreePoderoso() {
 		return hechizoPreferido.esPoderoso()
 	}
+	method estaCargado() {
+		return (artefactos.size() >= 5)
+	}
 }
 
 object espectro{
@@ -114,7 +117,7 @@ object cotaDeMalla{
 	}
 }
 object bendicion{
-	var lucha
+	var lucha = rolando.nivelDeHechiceria()
 	method lucha(){
 		return lucha
 	}
