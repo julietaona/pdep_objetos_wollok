@@ -31,6 +31,9 @@ object rolando{
 	method luchador(){
 		return luchaBase+artefactos.sum{unArtefacto => unArtefacto.lucha()}>(valorBase*hechizoPreferido.poder())+fuerzaOscura.poder()
 	}
+	method seCreePoderoso() {
+		return hechizoPreferido.esPoderoso()
+	}
 }
 
 object espectro{
@@ -92,10 +95,11 @@ object collarDivino{
 }
 object mascaraOscura{
 	var lucha
-	method lucha(){
-		return 1/2 * (fuerzaOscura.poder())
-	}
+	method lucha()=
+		if (fuerzaOscura>= 8)
+		 1/2 * (fuerzaOscura.poder()) else fuerzaOscura.poder() == 4 
 }
+
 object armadura{
 	var lucha=2
 	var refuerzos= #{cotaDeMalla,bendicion,hechizo,ninguno}
