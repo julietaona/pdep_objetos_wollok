@@ -55,3 +55,18 @@ test"NL sin Mascara Oscura = 9"{
 	assert.equals(rolando.sacaArtefacto(),mascaraOscura)
 	assert.equals(rolando.lucha(),9)
 }
+test"Esta cargado" {
+	assert.that(rolando.estaCargado())
+}
+test"Esta cargado SIN armadura" {
+	assert.equals(rolando.sacaArtefacto(),armadura)
+	assert.that(rolando.estaCargado())
+}
+test"NL de la armadura de rolando si tiene cota de malla"{
+	rolando.agregaArtefacto(cotaDeMalla)
+	assert.equals(rolando.lucha(),3)
+}
+test"NL de rolando si la armadura tiene bendicion" {
+	rolando.agregaArtefacto(bendicion)
+	assert.equals(rolando.lucha(), 58)
+}
