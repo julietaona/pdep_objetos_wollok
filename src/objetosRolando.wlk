@@ -30,7 +30,7 @@ object rolando{
 	}
 	
 	method sacaArtefacto(unArtefacto){
-		artefactos.remove(unArtefacto)i
+		artefactos.remove(unArtefacto)
 	}
 	
 	method lucha(){
@@ -130,6 +130,10 @@ object espadaDestino{
 	method lucha(){
 		return lucha
 	}
+	
+	method lucha(duenio){
+		return lucha
+	}
 }
 
 object collarDivino{
@@ -148,10 +152,14 @@ object collarDivino{
 	method lucha(){
 		return perlas
 	}
+	
+	method lucha(duenio){
+		return lucha
+	}
 }
 object mascaraOscura{
 	
-	method lucha(){
+	method lucha(duenio){
 		if (fuerzaOscura.valor() >= 8)
 		{
 		    return 1/2 * (fuerzaOscura.valor())
@@ -160,6 +168,7 @@ object mascaraOscura{
 			return 4
 		} 	
 	}
+	
 }
 
 object armadura{
@@ -167,57 +176,54 @@ object armadura{
 	method lucha(duenio){
 		return 2
 	}
+	
+	method lucha()
+	{
+		return 2
+	}
 }
 object armaduraSinRefuerzo{
 	
-	var armadura = armadura.lucha()
-	
 	method lucha(duenio){
-		return armadura;
+		return armadura.lucha();
 	}
 }
 
 object armaduraConCotaDeMalla{
 	
-	var armadura = armadura.lucha()
-	
 	method lucha(duenio){
-		return armadura + 1
+		return armadura.lucha() + 1
 	}
 }
 
 object armaduraConBendicion{
-	var armadura = armadura.lucha()
 	
 	method lucha(duenio)
 	{
-		return armadura + duenio.nivelDeHechiceria() 
+		return armadura.lucha() + duenio.nivelDeHechiceria() 
 	}
 }
 
 object armaduraConHechizoBasico{
 	
-	var armadura = armadura.lucha()
-	
 	method lucha(duenio)
 	{
-		return armadura + hechizoBasico.poder() 
+		return armadura.lucha() + hechizoBasico.poder() 
 	}
 }
 
 object armaduraConHechizoEspectroMalefico
 {	
-	var armadura = armadura.lucha()
 	
 	method lucha(duenio)
 	{
-		return armadura + espectroMalefico.poder() 
+		return armadura.lucha() + espectroMalefico.poder() 
 	}
 }
 
 object espejo{
 	
-	var armadura = armadura.lucha()
+	
 	var artefactosDuenio
 	
 	method artefactosDuenio(duenio)
@@ -237,11 +243,11 @@ object espejo{
 		
 		if(artefactosDuenio.size() == 0)
 		{
-			return armadura
+			return armadura.lucha(duenio)
 		}
 		else
 		{
-			return armadura + artefactosDuenio.max({unArtefacto => unArtefacto.poder()})
+			return armadura.lucha(duenio) + artefactosDuenio.max({unArtefacto => unArtefacto.lucha(duenio)})
 		}
 	}
 }

@@ -43,25 +43,40 @@ test"Nivel de lucha sin artefactos=1"{
 	assert.equals(rolando.lucha(),1)
 }
 test"NL=13"{
+	rolando.agregaArtefacto(collarDivino)
+	rolando.agregaArtefacto(espadaDestino)
+	rolando.agregaArtefacto(mascaraOscura)
 	assert.equals(rolando.lucha(),13)
 }
 test"NL con 3 perlas = 11"{
+	rolando.agregaArtefacto(collarDivino)
+	rolando.agregaArtefacto(espadaDestino)
+	rolando.agregaArtefacto(mascaraOscura)
 	collarDivino.perlas(3)
 	assert.equals(collarDivino.perlas(),3)
 	assert.equals(collarDivino.lucha(),3)
 	assert.equals(rolando.lucha(),11)
 }
 test"NL con base 8 = 20"{
+	rolando.agregaArtefacto(collarDivino)
+	rolando.agregaArtefacto(espadaDestino)
+	rolando.agregaArtefacto(mascaraOscura)
 	rolando.luchaBase(8)
 	assert.equals(rolando.luchaBase(),8)
 	assert.equals(rolando.lucha(),20)
 }
 test"NL de Mascara Oscura con 1 eclipse =5"{
+	rolando.agregaArtefacto(collarDivino)
+	rolando.agregaArtefacto(espadaDestino)
+	rolando.agregaArtefacto(mascaraOscura)
 	fuerzaOscura.eclipse()
 	assert.equals(fuerzaOscura.valor(),10)
-	assert.equals(mascaraOscura.lucha(),5)
+	assert.equals(mascaraOscura.lucha(rolando),5)
 }
 test"NL sin Mascara Oscura = 9"{
+	rolando.agregaArtefacto(collarDivino)
+	rolando.agregaArtefacto(espadaDestino)
+	rolando.agregaArtefacto(mascaraOscura)
 	rolando.sacaArtefacto(mascaraOscura)
 	assert.equals(rolando.lucha(),9)
 }
@@ -158,8 +173,8 @@ test"NH de rolando libro de hechizos con Reemplazar al hechizo preferido por un 
 	rolando.agregaArtefacto(armaduraSinRefuerzo)
 	rolando.agregaArtefacto(espejo)
 	
-	libroDeHechizos(espectroMalefico)
-	libroDeHechizos(hechizoBasico)
+	libroDeHechizos.agregaHechizo(espectroMalefico)
+	libroDeHechizos.agregaHechizo(hechizoBasico)
 	rolando.hechizoPreferido(libroDeHechizos)
 	
 	assert.equals(rolando.nivelDeHechiceria(), 56)
