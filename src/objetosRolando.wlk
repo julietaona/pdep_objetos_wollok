@@ -139,7 +139,6 @@ object espadaDestino{
 object collarDivino{
 	
 	var perlas = 5
-	var lucha = perlas
 	
 	method perlas(unasPerlas){
 		perlas = unasPerlas
@@ -149,12 +148,8 @@ object collarDivino{
 		return perlas
 	}
 	
-	method lucha(){
-		return perlas
-	}
-	
 	method lucha(duenio){
-		return lucha
+		return perlas
 	}
 }
 object mascaraOscura{
@@ -176,23 +171,18 @@ object armadura{
 	method lucha(duenio){
 		return 2
 	}
-	
-	method lucha()
-	{
-		return 2
-	}
 }
 object armaduraSinRefuerzo{
 	
 	method lucha(duenio){
-		return armadura.lucha();
+		return armadura.lucha(duenio);
 	}
 }
 
 object armaduraConCotaDeMalla{
 	
 	method lucha(duenio){
-		return armadura.lucha() + 1
+		return armadura.lucha(duenio) + 1
 	}
 }
 
@@ -200,7 +190,7 @@ object armaduraConBendicion{
 	
 	method lucha(duenio)
 	{
-		return armadura.lucha() + duenio.nivelDeHechiceria() 
+		return armadura.lucha(duenio) + duenio.nivelDeHechiceria() 
 	}
 }
 
@@ -208,7 +198,7 @@ object armaduraConHechizoBasico{
 	
 	method lucha(duenio)
 	{
-		return armadura.lucha() + hechizoBasico.poder() 
+		return armadura.lucha(duenio) + hechizoBasico.poder() 
 	}
 }
 
@@ -217,7 +207,7 @@ object armaduraConHechizoEspectroMalefico
 	
 	method lucha(duenio)
 	{
-		return armadura.lucha() + espectroMalefico.poder() 
+		return armadura.lucha(duenio) + espectroMalefico.poder() 
 	}
 }
 
@@ -243,10 +233,11 @@ object espejo{
 		
 		if(artefactosDuenio.size() == 0)
 		{
-			return armadura.lucha(duenio)
+			return 0
 		}
 		else
 		{
+			artefactosDuenio.sum({unArtefacto => unArtefacto.lucha(duenio)})
 			return armadura.lucha(duenio) + artefactosDuenio.max({unArtefacto => unArtefacto.lucha(duenio)})
 		}
 	}
