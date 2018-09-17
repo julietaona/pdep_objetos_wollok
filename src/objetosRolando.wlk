@@ -2,7 +2,7 @@ object rolando{
 	
 	var valorBase 				= 3
 	var hechizoPreferido 		= espectroMalefico
-	var artefactos 				= #{ espadaDestino, collarDivino, mascaraOscura, armaduraSinRefuerzo, espejo}
+	var artefactos 				= #{}
 	var luchaBase 				= 1
 	
 	method hechizoPreferido(unHechizoPreferido){
@@ -30,7 +30,7 @@ object rolando{
 	}
 	
 	method sacaArtefacto(unArtefacto){
-		artefactos.remove(unArtefacto)
+		artefactos.remove(unArtefacto)i
 	}
 	
 	method lucha(){

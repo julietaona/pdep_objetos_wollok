@@ -22,7 +22,7 @@ test "Espectro Malefico es poderoso" {
 	assert.that(espectroMalefico.poderoso())
 }
 test "Espectro Malefico cambiado a pepe no es poderoso"{
-	espectro.nombre("pepe")
+	espectroMalefico.nombre("pepe")
 	assert.equals(espectroMalefico.nombre(), ("pepe"))
 	assert.notThat(espectroMalefico.poderoso())
 }
@@ -34,21 +34,26 @@ test"NL<NH"{
 	assert.notThat(rolando.tieneMayorHabilidadDeLuchaQueNivelDeHechiceria())
 }
 test"Nivel de lucha sin artefactos=1"{
-	assert.equals(rolando.sacaArtefacto(),collarDivino)
-	assert.equals(rolando.sacaArtefacto(),espadaDestino)
-	assert.equals(rolando.sacaArtefacto(),mascaraOscura)
+	rolando.agregaArtefacto(collarDivino)
+	rolando.agregaArtefacto(espadaDestino)
+	rolando.agregaArtefacto(mascaraOscura)
+	rolando.sacaArtefacto(collarDivino)
+	rolando.sacaArtefacto(espadaDestino)
+	rolando.sacaArtefacto(mascaraOscura)
 	assert.equals(rolando.lucha(),1)
 }
 test"NL=13"{
 	assert.equals(rolando.lucha(),13)
 }
 test"NL con 3 perlas = 11"{
-	assert.equals(collarDivino.perlas(3),3)
+	collarDivino.perlas(3)
+	assert.equals(collarDivino.perlas(),3)
 	assert.equals(collarDivino.lucha(),3)
 	assert.equals(rolando.lucha(),11)
 }
 test"NL con base 8 = 20"{
-	assert.equals(rolando.luchaBase(8),8)
+	rolando.luchaBase(8)
+	assert.equals(rolando.luchaBase(),8)
 	assert.equals(rolando.lucha(),20)
 }
 test"NL de Mascara Oscura con 1 eclipse =5"{
@@ -57,21 +62,21 @@ test"NL de Mascara Oscura con 1 eclipse =5"{
 	assert.equals(mascaraOscura.lucha(),5)
 }
 test"NL sin Mascara Oscura = 9"{
-	assert.equals(rolando.sacaArtefacto(),mascaraOscura)
+	rolando.sacaArtefacto(mascaraOscura)
 	assert.equals(rolando.lucha(),9)
 }
 test"Esta cargado" {
 	assert.that(rolando.estaCargado())
 }
 test"Esta cargado SIN armadura" {
-	assert.equals(rolando.sacaArtefacto(),armadura)
+	rolando.sacaArtefacto(armadura)
 	assert.that(rolando.estaCargado())
 }
 test"NL de la armadura de rolando si tiene cota de malla"{
-	rolando.agregaArtefacto(cotaDeMalla)
+	rolando.agregaArtefacto(armaduraConCotaDeMalla)
 	assert.equals(rolando.lucha(),3)
 }
 test"NL de rolando si la armadura tiene bendicion" {
-	rolando.agregaArtefacto(bendicion)
+	rolando.agregaArtefacto(armaduraConBendicion)
 	assert.equals(rolando.lucha(), 58)
 }
