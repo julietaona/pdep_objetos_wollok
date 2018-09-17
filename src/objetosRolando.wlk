@@ -1,62 +1,83 @@
 object rolando{
-	var valorBase=3
-	var hechizoPreferido=espectro
-	var artefactos= #{espadaDestino,collarDivino,mascaraOscura, armadura}
-	var luchaBase=1
+	
+	var valorBase 				= 3
+	var hechizoPreferido 		= espectroMalefico
+	var artefactos 				= #{ espadaDestino, collarDivino, mascaraOscura, armaduraSinRefuerzo, espejo}
+	var luchaBase 				= 1
+	
 	method hechizoPreferido(unHechizoPreferido){
-		hechizoPreferido=unHechizoPreferido
-		return hechizoPreferido
+		hechizoPreferido = unHechizoPreferido
 	}
-	method nivelDeHechiceria(){
-		return(valorBase*hechizoPreferido.poder())+fuerzaOscura.poder()
-	}
+	
 	method hechizoPreferido(){
 		return hechizoPreferido
 	}
+	
+	method nivelDeHechiceria(){
+		return (valorBase * hechizoPreferido.poder()) + fuerzaOscura.valor()
+	}
+	
 	method luchaBase(unaBase){
-		luchaBase=unaBase
+		luchaBase = unaBase
+	}
+	
+	method luchaBase(){
 		return luchaBase
 	}
+	
 	method agregaArtefacto(unArtefacto){
 		artefactos.add(unArtefacto)
 	}
-	method sacaArtefacto(){
-		var unArtefacto=artefactos.anyOne()
+	
+	method sacaArtefacto(unArtefacto){
 		artefactos.remove(unArtefacto)
-		return unArtefacto
 	}
+	
 	method lucha(){
-		return luchaBase+artefactos.sum{unArtefacto => unArtefacto.lucha()}
+		return luchaBase + artefactos.sum{unArtefacto => unArtefacto.lucha(self)}
 	}
-	method luchador(){
-		return luchaBase+artefactos.sum{unArtefacto => unArtefacto.lucha()}>(valorBase*hechizoPreferido.poder())+fuerzaOscura.poder()
+	
+	method tieneMayorHabilidadDeLuchaQueNivelDeHechiceria(){
+		return self.lucha() > self.nivelDeHechiceria()
 	}
+	
 	method seCreePoderoso() {
-		return hechizoPreferido.esPoderoso()
+		return hechizoPreferido.poderoso()
 	}
+	
 	method estaCargado() {
 		return (artefactos.size() >= 5)
 	}
+	method artefactos()
+	{
+		return artefactos
+	}
 }
 
-object espectro{
-	var nombre="espectro malefico"
+object espectroMalefico{
+	var nombre = "Espectro malefico"
+	
 	method poder(){
 		return nombre.size()
 	}
 	
 	method nombre(unNombre){
-		nombre=unNombre
+		nombre = unNombre
+	}
+	
+	method nombre(){
 		return nombre
 	}
+	
 	method poderoso(){
-		return nombre.size()>15
+		return self.poder() > 15
 	}
 }
 
 object hechizoBasico{
-	var poder=10
-	var poderoso=false
+	var poder = 10
+	var poderoso = false
+	
 	method poder(){
 		return poder
 	}
@@ -65,60 +86,151 @@ object hechizoBasico{
 	}
 }
 
+object libroDeHechizos
+{
+	var poderoso = true
+	
+	method poder()
+	{
+		return unHechizo.filter({unHechizo => unHechizo.poderoso()}).sum{unHechizo => unHechizo.poder()}
+	}
+}
+
 object fuerzaOscura{
-	var poder=5
-	method poder(){
-		return poder
+	var valor = 5
+	
+	method valor(){
+		return valor
 	}
-	method poder(unPoder){
-		poder=unPoder
+	
+	method valor(unValor){
+		valor = unValor
 	}
+	
 	method eclipse(){
-		poder*=2
-		return poder
+		valor *= 2
 	}
 }
 
 object espadaDestino{
-	var lucha=3
+	
+	var lucha = 3
+	
 	method lucha(){
 		return lucha
 	}
 }
+
 object collarDivino{
-	var perlas=5
-	var lucha=perlas
+	
+	var perlas = 5
+	var lucha = perlas
+	
 	method perlas(unasPerlas){
-		perlas=unasPerlas
+		perlas = unasPerlas
+	}
+	
+	method perlas(){
 		return perlas
 	}
+	
 	method lucha(){
 		return perlas
 	}
 }
 object mascaraOscura{
-	var lucha
-	method lucha()=
-		if (fuerzaOscura>= 8)
-		 1/2 * (fuerzaOscura.poder()) else fuerzaOscura.poder() == 4 
+	
+	method lucha(){
+		if (fuerzaOscura.valor() >= 8)
+		{
+		    return 1/2 * (fuerzaOscura.valor())
+		}
+		else{
+			return 4
+		} 	
+	}
 }
 
 object armadura{
-	var lucha=2
-	var refuerzos= #{cotaDeMalla,bendicion,hechizo,ninguno}
-	method lucha(){
-		return lucha
+	
+	method lucha(duenio){
+		return 2
 	}
 }
-object cotaDeMalla{
-	var lucha=1
-	method lucha(){
-		return lucha
+object armaduraSinRefuerzo{
+	
+	var armadura = armadura.lucha()
+	
+	method lucha(duenio){
+		return armadura;
 	}
 }
-object bendicion{
-	var lucha = rolando.nivelDeHechiceria()
-	method lucha(){
-		return lucha
+
+object armaduraConCotaDeMalla{
+	
+	var armadura = armadura.lucha()
+	
+	method lucha(duenio){
+		return armadura + 1
+	}
+}
+
+object armaduraConBendicion{
+	var armadura = armadura.lucha()
+	
+	method lucha(duenio)
+	{
+		return armadura + duenio.nivelDeHechiceria() 
+	}
+}
+
+object armaduraConHechizoBasico{
+	
+	var armadura = armadura.lucha()
+	
+	method lucha(duenio)
+	{
+		return armadura + hechizoBasico.poder() 
+	}
+}
+
+object armaduraConHechizoEspectroMalefico
+{	
+	var armadura = armadura.lucha()
+	
+	method lucha(duenio)
+	{
+		return armadura + espectroMalefico.poder() 
+	}
+}
+
+object espejo{
+	
+	var armadura = armadura.lucha()
+	var artefactosDuenio
+	
+	method artefactosDuenio(duenio)
+	{
+		artefactosDuenio = duenio.artefactos()	
+	}
+	
+	method artefactosDuenio()
+	{
+		return artefactosDuenio
+	}
+	
+	method lucha(duenio)
+	{
+		self.artefactosDuenio(duenio) 
+		//artefactosDuenio.remove(espejo)
+		
+		if(artefactosDuenio.size() == 0)
+		{
+			return armadura
+		}
+		else
+		{
+			return armadura + artefactosDuenio.max({unArtefacto => unArtefacto.poder()})
+		}
 	}
 }
