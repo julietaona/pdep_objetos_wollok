@@ -233,7 +233,7 @@ object espejo{
 	method lucha(duenio)
 	{
 		self.artefactosDuenio(duenio) 
-		//artefactosDuenio.remove(espejo)
+		artefactosDuenio.remove(self)
 		
 		if(artefactosDuenio.size() == 0)
 		{
