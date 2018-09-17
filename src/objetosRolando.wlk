@@ -89,10 +89,21 @@ object hechizoBasico{
 object libroDeHechizos
 {
 	var poderoso = true
+	var hechizos = []
+	
+	method hechizos()
+	{
+		return hechizos
+	}
+	
+	method agregaHechizo(nuevoHechizo)
+	{
+		hechizos.add(nuevoHechizo)
+	}
 	
 	method poder()
 	{
-		return unHechizo.filter({unHechizo => unHechizo.poderoso()}).sum{unHechizo => unHechizo.poder()}
+		return hechizos.filter({unHechizo => unHechizo.poderoso()}).sum{unHechizo => unHechizo.poder()}
 	}
 }
 
