@@ -88,7 +88,6 @@ object hechizoBasico{
 
 object libroDeHechizos
 {
-	var poderoso = true
 	var hechizos = []
 	
 	method hechizos()
@@ -213,32 +212,21 @@ object armaduraConHechizoEspectroMalefico
 
 object espejo{
 	
-	
-	var artefactosDuenio
-	
-	method artefactosDuenio(duenio)
+	method sinEspejo(duenio)
 	{
-		artefactosDuenio = duenio.artefactos()	
-	}
-	
-	method artefactosDuenio()
-	{
-		return artefactosDuenio
+		return duenio.artefactos().filter({unArtefacto => unArtefacto != self}) 	
 	}
 	
 	method lucha(duenio)
 	{
-		self.artefactosDuenio(duenio) 
-		artefactosDuenio.remove(self)
-		
-		if(artefactosDuenio.size() == 0)
+		if(duenio.artefactos().contains(self) and self.sinEspejo(duenio).isEmpty())
 		{
 			return 0
 		}
 		else
 		{
-			artefactosDuenio.sum({unArtefacto => unArtefacto.lucha(duenio)})
-			return armadura.lucha(duenio) + artefactosDuenio.max({unArtefacto => unArtefacto.lucha(duenio)})
+			return self.sinEspejo(duenio).max({unArtefacto => unArtefacto.lucha(duenio)}).lucha(duenio)
 		}
 	}
+
 }
