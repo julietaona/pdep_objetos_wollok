@@ -161,4 +161,3 @@ test"NH de rolando libro de hechizos con Reemplazar al hechizo preferido por un 
 	
 	assert.equals(rolando.nivelDeHechiceria(), 56)
 }
-
