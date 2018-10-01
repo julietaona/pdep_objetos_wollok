@@ -39,7 +39,7 @@ object rolando{
 	
 	method artefactoConHabilidadDeLuchaMax()
 	{
-		return artefactos.max({unArtefacto => unArtefacto.habilidadDeLucha()}).habilidadDeLucha()
+		return artefactos.max({unArtefacto => unArtefacto.habilidadDeLucha(self)}).habilidadDeLucha(self)
 	}
 	
 	method soloTieneEspejoEntreSusArtefactos()
