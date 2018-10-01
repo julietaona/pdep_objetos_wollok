@@ -1,4 +1,4 @@
-import objetosRolando.*
+import rolando.*
 test "Nivel de hechiceria=56" {
 	assert.equals(rolando.nivelDeHechiceria(),56)
 
