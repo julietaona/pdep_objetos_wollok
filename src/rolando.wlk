@@ -10,7 +10,7 @@ object rolando{
 	var property luchaBase 						= 1
 	
 	method nivelDeHechiceria(){
-		return (valorBase * hechizoPreferido.poder()) + fuerzaOscura.valor()
+		return (valorBase * hechizoPreferido.cantidadDePoder()) + fuerzaOscura.valor()
 	}
 	
 	method agregaArtefacto(unArtefacto){
@@ -21,12 +21,12 @@ object rolando{
 		artefactos.remove(unArtefacto)
 	}
 	
-	method nivelDeHabilidadDelucha(){
+	method nivelDeHabilidadDeLucha(){
 		return luchaBase + artefactos.sum{unArtefacto => unArtefacto.habilidadDeLucha(self)}
 	}
 	
 	method tieneMayorHabilidadDeLuchaQueNivelDeHechiceria(){
-		return self.nivelDeHabilidadDelucha() > self.nivelDeHechiceria()
+		return self.nivelDeHabilidadDeLucha() > self.nivelDeHechiceria()
 	}
 	
 	method seCreePoderoso() {
