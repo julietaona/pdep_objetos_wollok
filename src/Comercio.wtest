@@ -1,0 +1,80 @@
+import rolando.*
+import hechizos.*
+import fuerzaOscura.*
+import artefactos.*
+
+describe "comercio" {
+
+	const alacachulacachicomula = new Logo("alacachula cachicomula", 1)
+	const xenia = new Personaje(hechizoPreferido = alacachulacachicomula)
+	const thor = new Personaje(hechizoPreferido = hechizoBasico)
+	const loki = new Personaje(hechizoPreferido = hechizoBasico, monedas = 5)
+	const espada = new Arma()
+	const armaduraSinRefuerzo = new Armadura(refuerzo = sinRefuerzo)
+	const cotaDeMalla = new RefuerzoDeCotaDeMalla(5)
+	const armaduraConCotaDeMalla = new Armadura(refuerzo = cotaDeMalla)
+	const armaduraConBendicion = new Armadura(refuerzo = refuerzoDeBendicion, poderDeLuchaBase = 2)
+	const refuerzoAlacachula = new RefuerzoDeHechizo(hechizoRefuerzo = alacachulacachicomula)
+	const armaduraConAlacachula = new Armadura(refuerzo = refuerzoAlacachula, poderDeLuchaBase = 2)
+	const libroDeHechizos = new LibroDeHechizos()
+	const espejo = new Espejo()
+
+	test "Precio de hechizo de logo alacachulacachimula" {
+		assert.equals(alacachulacachicomula.precio(),22)
+	}
+
+	test "Monedas de xenia luego de canjear hechizo" {
+		xenia.canjearHechizo(hechizoBasico)
+		assert.equals(xenia.monedas(),100)
+	}
+
+	test "Monedas de thor luego de canjear hechizo" {
+		thor.canjearHechizo(alacachulacachicomula)
+		assert.equals(thor.monedas(),83)
+	}
+
+	test "Monedas de thor luego de canjear 2 veces el hechizo" {
+		thor.canjearHechizo(hechizoBasico)
+		thor.canjearHechizo(hechizoBasico)
+		assert.equals(thor.monedas(),90)
+	}
+
+	test "Loki quiere canjear el hechizo pero no le alcanzan las monedas" {
+		assert.throwsExceptionWithMessage("No tiene monedas suficientes", { loki.canjearHechizo(alacachulacachicomula)})
+	}
+
+	test "Monedas de xenia luego de comprar artefactos " {
+		xenia.adquirirArtefacto(espada)
+		xenia.adquirirArtefacto(collarDivino)
+		xenia.adquirirArtefacto(armaduraSinRefuerzo)
+		xenia.adquirirArtefacto(armaduraConCotaDeMalla)
+		assert.equals(xenia.monedas(),70.5)
+	}
+
+	test "Cantidad de artefactos luego de hacer varias compras" {
+		xenia.adquirirArtefacto(espada)
+		xenia.adquirirArtefacto(collarDivino)
+		xenia.adquirirArtefacto(armaduraSinRefuerzo)
+		xenia.adquirirArtefacto(armaduraConCotaDeMalla)
+		assert.equals(xenia.artefactos().size(),4)
+	}
+
+	test "Monedas de thor luego de comprar artefactos" {
+		thor.adquirirArtefacto(armaduraConBendicion)
+		thor.adquirirArtefacto(armaduraConAlacachula)
+		assert.equals(thor.monedas(),74)
+	}
+
+	test "Loki quiere comprar el espejo, pero no le alcanza" {
+		assert.throwsExceptionWithMessage("No tiene monedas suficientes", { loki.adquirirArtefacto(espejo)})
+	}
+
+	test "Xenia canjea por un libro de hechizos" {
+		libroDeHechizos.agregarHechizo(alacachulacachicomula)
+		libroDeHechizos.agregarHechizo(hechizoBasico)
+		xenia.canjearHechizo(libroDeHechizos)
+		assert.equals(xenia.monedas(),69)
+	}
+
+}
+

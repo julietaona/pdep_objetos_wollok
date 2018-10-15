@@ -51,4 +51,27 @@ class Personaje{
 		return artefactos.max({unArtefacto => unArtefacto.habilidadDeLucha(self)}).habilidadDeLucha(self)
 	}
 	
+	
+	method validarCompra(montoCompra, monedasDisponibles) {
+		if (montoCompra > monedasDisponibles) {
+			throw new Exception("No tiene monedas suficientes")
+		}
+	}
+	method hechizoEnParteDePago() = self.hechizoPreferido().precio() / 2
+
+	method canjearHechizo(_nuevoHechizoPreferido) {
+		self.validarCompra(_nuevoHechizoPreferido.precio(), monedas + self.hechizoEnParteDePago())											//primero se fija si PODES comprar el hechizo
+						//(			MONTO COMPRA		  ,				MONEDAS DISPONIBLES		 )
+		monedas = self.monedas() - _nuevoHechizoPreferido.precio() + self.hechizoEnParteDePago().min(_nuevoHechizoPreferido.precio())		//despues se cambian las monedas
+		self.hechizoPreferido(_nuevoHechizoPreferido)																						//finalmente se establece el nuevo hechizo preferido
+	}
+	method adquirirArtefacto(_nuevoArtefacto) {
+		self.validarCompra(_nuevoArtefacto.precio(), monedas)
+		monedas = self.monedas() - _nuevoArtefacto.precio()
+		self.agregaArtefacto(_nuevoArtefacto)
+	}
+	
+	method objetivoCumplido() {
+		monedas = self.monedas() + 10
+	}
 }
