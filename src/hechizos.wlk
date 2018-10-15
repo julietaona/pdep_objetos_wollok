@@ -1,14 +1,14 @@
 class Logo{
 	var property nombreHechizo
-	var property multiplicador = new Range(1, 10).anyOne()
+	var property multiplicador = new Range(1, 10).anyOne()			//sirve para darle un multiplicador aleatorio al nuevo hechizo que creeemos
 
-	constructor(_nombreHechizo) {
-		nombreHechizo = _nombreHechizo
+	constructor(unNombreHechizo) {
+		nombreHechizo = unNombreHechizo
 	}
 
-	constructor(_nombreHechizo, _multiplicador) {
-		nombreHechizo = _nombreHechizo
-		multiplicador = _multiplicador
+	constructor(unNombreHechizo, unMultiplicador) {
+		nombreHechizo = unNombreHechizo
+		multiplicador = unMultiplicador
 	}
 	
 	method poderHechizo(){
@@ -36,9 +36,10 @@ object espectroMalefico{
 object hechizoBasico{
 	var property poderHechizo = 10
 	var property esPoderoso = false
+	const property precio = 10
 }
 
-object libroDeHechizos
+class LibroDeHechizos
 {
 	var property hechizos = []
 	
@@ -46,9 +47,12 @@ object libroDeHechizos
 	{
 		hechizos.add(nuevoHechizo)
 	}
-	
-	method poderHechizo()
-	{
-		return hechizos.filter({unHechizo => unHechizo.esPoderoso()}).sum{unHechizo => unHechizo.poderHechizo()}
+	method sacarHechizo(nuevoHechizo) {
+		hechizos.remove(nuevoHechizo)
 	}
+	
+	method hechizosPoderosos() = hechizos.filter({ hechizo => hechizo.esPoderoso() })
+	method poderHechizo() = self.hechizosPoderosos().sum({ hechizo => hechizo.poderHechizo() })
+		
+	method precio() = (hechizos.size() * 10) + self.poderHechizo()
 }

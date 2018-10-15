@@ -22,7 +22,7 @@ describe "Test Hechiceria" {
 	}
 	test "NH con 1 eclipse=61" {
 		fuerzaOscura.eclipse()
-		assert.equals(fuerzaOscura.valor(),10)
+		assert.equals(fuerzaOscura.valorFuerzaOscura(),10)
 		assert.equals(rolando.nivelDeHechiceria(),61)
 	}
 	test "Espectro Malefico es poderoso" {
@@ -37,6 +37,6 @@ describe "Test Hechiceria" {
 		assert.notThat(hechizoBasico.esPoderoso())
 	}
 	test ""{
-		assert.equals(frio.poderHechizo(),45)		//testeo de poder del nuevo hechizo creado. Siempre va a dar numero aleatorio, es normal que falle
+		assert.equals(frio.poderHechizo(),45)		//testeo de poder INNECESARIO del nuevo hechizo creado. Siempre va a dar numero aleatorio, es normal que falle
 	}
 }

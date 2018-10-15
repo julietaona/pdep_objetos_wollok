@@ -2,7 +2,6 @@ import fuerzaOscura.*
 import hechizos.*
 
 class Artefacto {
-
 	var property duenio = null
 
 	method duenio(_duenio) {
@@ -11,25 +10,24 @@ class Artefacto {
 		}
 		duenio = _duenio
 	}
-
 }
 
 class Arma inherits Artefacto {
-	
 	var property habilidadDeLucha = 3
 	
 	method habilidadDeLucha(){
 		return habilidadDeLucha
 	}
+	method precio() = self.habilidadDeLucha() * 5
 }
 
-object collarDivino inherits Artefacto{
-	
+object collarDivino inherits Artefacto{	
 	var property perlas = 5
 	
 	method habilidadDeLucha(){
 		return perlas
 	}
+	method precio() = self.perlas() * 2
 }
 
 class Mascara inherits Artefacto{
@@ -46,68 +44,60 @@ class Mascara inherits Artefacto{
 	method habilidadDeLucha()=((fuerzaOscura.valorFuerzaOscura() / 2) * indiceOscuridad).max(minimo)
 }
 
-object armadura{
-	
-	method habilidadDeLucha(duenio){
-		return 2
+class Armadura inherits Artefacto {
+	var property refuerzo = sinRefuerzo
+	const property poderDeLuchaBase = 1
+
+	method cambiarRefuerzo(unRefuerzo) {		//un setter para modificar el refuerzo
+		refuerzo = unRefuerzo
 	}
+	method habilidadDeLucha() = poderDeLuchaBase + self.valorDeRefuerzo()
+	method valorDeRefuerzo() = refuerzo.valorDeRefuerzo(self)
+	method precio() = refuerzo.precioRefuerzo(self)
+	
 }
-object armaduraSinRefuerzo{
-	
-	method habilidadDeLucha(duenio){
-		return armadura.habilidadDeLucha(duenio);
-	}
+object sinRefuerzo{
+	method valorDeRefuerzo(armadura) = 0
+	method precioRefuerzo(armadura) = 2	
 }
 
-object armaduraConCotaDeMalla{
-	
-	method habilidadDeLucha(duenio){
-		return armadura.habilidadDeLucha(duenio) + 1
+class RefuerzoDeCotaDeMalla{
+	const property unidadDeLucha
+	constructor(_unidadDeLucha) {
+		unidadDeLucha = _unidadDeLucha
 	}
+	
+	method valorDeRefuerzo(armadura) = self.unidadDeLucha()
+	method precioRefuerzo(armadura) = self.unidadDeLucha() / 2
+	
 }
 
-object armaduraConBendicion{
-	
-	method habilidadDeLucha(duenio)
-	{
-		return armadura.habilidadDeLucha(duenio) + duenio.nivelDeHechiceria() 
-	}
+object refuerzoDeBendicion {
+
+	method valorDeRefuerzo(armadura) = armadura.duenio().nivelDeHechiceria()
+	method precioRefuerzo(armadura) = armadura.poderDeLuchaBase()
+
 }
 
-object armaduraConHechizoBasico{
-	
-	method habilidadDeLucha(duenio)
-	{
-		return armadura.habilidadDeLucha(duenio) + hechizoBasico.poderHechizo() 
-	}
+class RefuerzoDeHechizo {
+	var property hechizoRefuerzo = hechizoNulo		//se hace para iniciar con 0 en el poder de hechizo
+
+	method valorDeRefuerzo(armadura) = hechizoRefuerzo.poderHechizo()
+	method precioRefuerzo(armadura) = hechizoRefuerzo.precio() + armadura.poderDeLuchaBase()
+
+}
+object hechizoNulo {
+	const property poderHechizo = 0
 }
 
-object armaduraConHechizoEspectroMalefico
-{	
+class Espejo inherits Artefacto {
 	
-	method habilidadDeLucha(duenio)
-	{
-		return armadura.habilidadDeLucha(duenio) + espectroMalefico.poderHechizo() 
-	}
-}
-
-object espejo{
-	
-	method sinEspejo(duenio)
-	{
-		return duenio.artefactos().filter({unArtefacto => unArtefacto != self}) 	
-	}
-	
-	method habilidadDeLucha(duenio)
-	{
-		if(duenio.soloTieneEspejoEntreSusArtefactos())
-		{
+	method habilidadDeLucha() {
+		const artefactos = duenio.sinArtefactos(self)
+		if (artefactos.size() == 0) {
 			return 0
 		}
-		else
-		{
-			return duenio.valorDelArtefactoConHabilidadDeLuchaMax()
-		}
+		return artefactos.map{ artefacto => artefacto.habilidadDeLucha() }.max()
 	}
-
+	method precio() = 90
 }
