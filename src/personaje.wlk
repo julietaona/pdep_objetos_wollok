@@ -5,7 +5,7 @@ import artefactos.*
 class Personaje{
 	
 	var property valorBase 						= 3
-	var property hechizoPreferido 				= espectroMalefico
+	var property hechizoPreferido 				        = espectroMalefico
 	var property artefactos 					= #{}
 	var property luchaBase 						= 1
 	var property monedas 						= 100
