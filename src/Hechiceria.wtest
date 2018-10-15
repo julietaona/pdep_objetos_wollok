@@ -1,0 +1,42 @@
+import rolando.*
+import hechizos.*
+import fuerzaOscura.*
+import artefactos.*
+
+describe "Test Hechiceria" {
+	const rolando = new Personaje()
+	const frio = new Logo(nombreHechizo="Descarga de Escarcha") //testeo de creacion de hechizo
+	test "Nivel de hechiceria=56" {
+		assert.equals(rolando.nivelDeHechiceria(),56)
+
+	}
+	test "NH con Espectro Superrecontramalefico muajajaja=125" {
+		espectroMalefico.nombre("espectro superrecontramalefico muajajaja")
+		assert.equals(espectroMalefico.nombre(), "espectro superrecontramalefico muajajaja")
+		assert.equals(rolando.nivelDeHechiceria(),125)
+	}
+	test "NH con Hechizo Basico como hechizo preferido=35" {
+		rolando.hechizoPreferido(hechizoBasico)
+		assert.equals(rolando.hechizoPreferido(),hechizoBasico)
+		assert.equals(rolando.nivelDeHechiceria(),35)
+	}
+	test "NH con 1 eclipse=61" {
+		fuerzaOscura.eclipse()
+		assert.equals(fuerzaOscura.valor(),10)
+		assert.equals(rolando.nivelDeHechiceria(),61)
+	}
+	test "Espectro Malefico es poderoso" {
+		assert.that(espectroMalefico.esPoderoso())
+	}
+	test "Espectro Malefico cambiado a pepe no es poderoso"{
+		espectroMalefico.nombre("pepe")
+		assert.equals(espectroMalefico.nombre(), ("pepe"))
+		assert.notThat(espectroMalefico.esPoderoso())
+	}
+	test "Hechizo Basico no es poderoso"{
+		assert.notThat(hechizoBasico.esPoderoso())
+	}
+	test ""{
+		assert.equals(frio.poderHechizo(),45)		//testeo de poder del nuevo hechizo creado. Siempre va a dar numero aleatorio, es normal que falle
+	}
+}

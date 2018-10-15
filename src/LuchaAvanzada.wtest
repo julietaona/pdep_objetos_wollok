@@ -1,0 +1,90 @@
+import rolando.*
+import hechizos.*
+import fuerzaOscura.*
+import artefactos.*
+describe "Testeo armadura"{
+	test"Esta cargado" {
+	rolando.agregaArtefacto(espadaDestino)
+	rolando.agregaArtefacto(collarDivino)
+	rolando.agregaArtefacto(mascaraOscura)
+	rolando.agregaArtefacto(armaduraSinRefuerzo)
+	rolando.agregaArtefacto(espejo)
+	assert.that(rolando.estaCargado())
+}
+
+test"Esta cargado SIN armadura" {
+	rolando.agregaArtefacto(espadaDestino)
+	rolando.agregaArtefacto(collarDivino)
+	rolando.agregaArtefacto(mascaraOscura)
+	rolando.agregaArtefacto(armaduraSinRefuerzo)
+	rolando.agregaArtefacto(espejo)
+	rolando.sacaArtefacto(armaduraSinRefuerzo)
+	assert.notThat(rolando.estaCargado())
+}
+
+test"Nivel de lucha de rolando"{
+	rolando.agregaArtefacto(espadaDestino)
+	rolando.agregaArtefacto(collarDivino)
+	rolando.agregaArtefacto(mascaraOscura)
+	rolando.agregaArtefacto(armaduraSinRefuerzo)
+	rolando.agregaArtefacto(espejo)
+	
+	assert.equals(rolando.nivelDeHabilidadDeLucha(),20)
+}
+
+test"NL de la armadura de rolando si tiene cota de malla"{
+	rolando.luchaBase(0)
+	rolando.agregaArtefacto(armaduraConCotaDeMalla)
+	assert.equals(rolando.nivelDeHabilidadDeLucha(),3)
+}
+test"NL de rolando si la armadura tiene bendicion" {
+	rolando.luchaBase(0)
+	rolando.agregaArtefacto(armaduraConBendicion)
+	assert.equals(rolando.nivelDeHabilidadDeLucha(), 58)
+}
+
+test"NL de rolando si la armadura tiene hechizoBasico" {
+	rolando.luchaBase(0)
+	rolando.agregaArtefacto(armaduraConHechizoBasico)
+	assert.equals(rolando.nivelDeHabilidadDeLucha(), 12)
+}
+
+test"NL de rolando si la armadura tiene espectroMalefico" {
+	rolando.luchaBase(0)
+	rolando.agregaArtefacto(armaduraConHechizoEspectroMalefico)
+	assert.equals(rolando.nivelDeHabilidadDeLucha(), 19)
+}
+
+test"NL de rolando si elimino todos los artefactos y agrego espejo" {
+	rolando.agregaArtefacto(espadaDestino)
+	rolando.agregaArtefacto(collarDivino)
+	rolando.agregaArtefacto(mascaraOscura)
+	rolando.agregaArtefacto(armaduraSinRefuerzo)
+	rolando.agregaArtefacto(espejo)
+	
+	rolando.sacaArtefacto(espadaDestino)
+	rolando.sacaArtefacto(collarDivino)
+	rolando.sacaArtefacto(mascaraOscura)
+	rolando.sacaArtefacto(armaduraSinRefuerzo)
+	rolando.sacaArtefacto(espejo)
+	
+	rolando.agregaArtefacto(espejo)
+	
+	assert.equals(rolando.nivelDeHabilidadDeLucha(),1)
+}
+
+test"NH de rolando libro de hechizos con Reemplazar al hechizo preferido por un libro de hechizos que contenga el espectro maléfico (con nombre “espectro maléfico”) y al hechizo básico." {
+	rolando.agregaArtefacto(espadaDestino)
+	rolando.agregaArtefacto(collarDivino)
+	rolando.agregaArtefacto(mascaraOscura)
+	rolando.agregaArtefacto(armaduraSinRefuerzo)
+	rolando.agregaArtefacto(espejo)
+	
+	libroDeHechizos.agregarHechizo(espectroMalefico)
+	libroDeHechizos.agregarHechizo(hechizoBasico)
+	rolando.hechizoPreferido(libroDeHechizos)
+	
+	assert.equals(rolando.nivelDeHechiceria(), 56)
+}
+	
+}

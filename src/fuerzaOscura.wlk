@@ -1,7 +1,6 @@
 object fuerzaOscura{
-	var property valor = 5
-	
+	var property valorFuerzaOscura = 5
 	method eclipse(){
-		valor *= 2
+		valorFuerzaOscura *= 2
 	}
 }

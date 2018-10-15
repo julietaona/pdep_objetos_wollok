@@ -2,7 +2,7 @@ import fuerzaOscura.*
 import hechizos.*
 import artefactos.*
 
-object rolando{
+class Personaje{
 	
 	var property valorBase 						= 3
 	var property hechizoPreferido 				= espectroMalefico
@@ -10,20 +10,24 @@ object rolando{
 	var property luchaBase 						= 1
 	
 	method nivelDeHechiceria(){
-		return (valorBase * hechizoPreferido.cantidadDePoder()) + fuerzaOscura.valor()
+		return (valorBase * hechizoPreferido.poderHechizo()) + fuerzaOscura.valorFuerzaOscura()
 	}
 	
 	method agregaArtefacto(unArtefacto){
+		unArtefacto.duenio(self)
 		artefactos.add(unArtefacto)
 	}
 	
-	method sacaArtefacto(unArtefacto){
+	method sacarArtefacto(unArtefacto){
 		artefactos.remove(unArtefacto)
 	}
 	
-	method nivelDeHabilidadDeLucha(){
-		return luchaBase + artefactos.sum{unArtefacto => unArtefacto.habilidadDeLucha(self)}
+	method sacarTodosLosArtefactos(){
+		artefactos.clear()
 	}
+	
+	method nivelDeHabilidadDeLucha() = luchaBase + self.poderArtefactos()
+	method poderArtefactos() = artefactos.sum{ artefacto => artefacto.habilidadDeLucha() }
 	
 	method tieneMayorHabilidadDeLuchaQueNivelDeHechiceria(){
 		return self.nivelDeHabilidadDeLucha() > self.nivelDeHechiceria()

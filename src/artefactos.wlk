@@ -1,30 +1,49 @@
 import fuerzaOscura.*
 import hechizos.*
 
-object espadaDestino{
+class Artefacto {
+
+	var property duenio = null
+
+	method duenio(_duenio) {
+		if (duenio != null) {
+			duenio.sacarArtefacto(self)
+		}
+		duenio = _duenio
+	}
+
+}
+
+class Arma inherits Artefacto {
 	
 	var property habilidadDeLucha = 3
 	
-	method habilidadDeLucha(duenio){
+	method habilidadDeLucha(){
 		return habilidadDeLucha
 	}
 }
 
-object collarDivino{
+object collarDivino inherits Artefacto{
 	
 	var property perlas = 5
 	
-	method habilidadDeLucha(duenio){
+	method habilidadDeLucha(){
 		return perlas
 	}
 }
 
-object mascaraOscura{
-	
-	method habilidadDeLucha(duenio){	
-		return 4.max(fuerzaOscura.valor()/2)
+class Mascara inherits Artefacto{
+	var property indiceOscuridad
+	var property minimo = 4
+
+	constructor(_indiceOscuridad) {
+		if (_indiceOscuridad < 0 || _indiceOscuridad > 1) {
+			throw new Exception("El indice de oscuridad "+_indiceOscuridad+" no es valido, tiene que estar entre 0 y 1")
+		}
+		indiceOscuridad = _indiceOscuridad
 	}
-	
+
+	method habilidadDeLucha()=((fuerzaOscura.valorFuerzaOscura() / 2) * indiceOscuridad).max(minimo)
 }
 
 object armadura{
@@ -59,7 +78,7 @@ object armaduraConHechizoBasico{
 	
 	method habilidadDeLucha(duenio)
 	{
-		return armadura.habilidadDeLucha(duenio) + hechizoBasico.cantidadDePoder() 
+		return armadura.habilidadDeLucha(duenio) + hechizoBasico.poderHechizo() 
 	}
 }
 
@@ -68,7 +87,7 @@ object armaduraConHechizoEspectroMalefico
 	
 	method habilidadDeLucha(duenio)
 	{
-		return armadura.habilidadDeLucha(duenio) + espectroMalefico.cantidadDePoder() 
+		return armadura.habilidadDeLucha(duenio) + espectroMalefico.poderHechizo() 
 	}
 }
 
