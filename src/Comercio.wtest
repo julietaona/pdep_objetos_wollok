@@ -20,23 +20,23 @@ describe "comercio" {
 	const espejo = new Espejo()
 
 	test "Precio de hechizo de logo alacachulacachimula" {
-		assert.equals(alacachulacachicomula.precio(),22)
+		assert.equals(22,alacachulacachicomula.precio())
 	}
 
 	test "Monedas de xenia luego de canjear hechizo" {
 		xenia.canjearHechizo(hechizoBasico)
-		assert.equals(xenia.monedas(),100)
+		assert.equals(100,xenia.monedas())
 	}
 
 	test "Monedas de thor luego de canjear hechizo" {
 		thor.canjearHechizo(alacachulacachicomula)
-		assert.equals(thor.monedas(),83)
+		assert.equals(83,thor.monedas())
 	}
 
 	test "Monedas de thor luego de canjear 2 veces el hechizo" {
 		thor.canjearHechizo(hechizoBasico)
 		thor.canjearHechizo(hechizoBasico)
-		assert.equals(thor.monedas(),90)
+		assert.equals(90,thor.monedas())
 	}
 
 	test "Loki quiere canjear el hechizo pero no le alcanzan las monedas" {
@@ -48,7 +48,7 @@ describe "comercio" {
 		xenia.adquirirArtefacto(collarDivino)
 		xenia.adquirirArtefacto(armaduraSinRefuerzo)
 		xenia.adquirirArtefacto(armaduraConCotaDeMalla)
-		assert.equals(xenia.monedas(),70.5)
+		assert.equals(70.5,xenia.monedas())
 	}
 
 	test "Cantidad de artefactos luego de hacer varias compras" {
@@ -56,13 +56,13 @@ describe "comercio" {
 		xenia.adquirirArtefacto(collarDivino)
 		xenia.adquirirArtefacto(armaduraSinRefuerzo)
 		xenia.adquirirArtefacto(armaduraConCotaDeMalla)
-		assert.equals(xenia.artefactos().size(),4)
+		assert.equals(4,xenia.artefactos().size())
 	}
 
 	test "Monedas de thor luego de comprar artefactos" {
 		thor.adquirirArtefacto(armaduraConBendicion)
 		thor.adquirirArtefacto(armaduraConAlacachula)
-		assert.equals(thor.monedas(),74)
+		assert.equals(74,thor.monedas())
 	}
 
 	test "Loki quiere comprar el espejo, pero no le alcanza" {
@@ -73,7 +73,7 @@ describe "comercio" {
 		libroDeHechizos.agregarHechizo(alacachulacachicomula)
 		libroDeHechizos.agregarHechizo(hechizoBasico)
 		xenia.canjearHechizo(libroDeHechizos)
-		assert.equals(xenia.monedas(),69)
+		assert.equals(69,xenia.monedas())
 	}
 
 }
