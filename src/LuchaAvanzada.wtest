@@ -29,50 +29,50 @@ describe "Testeo armadura"{
 	}
 
 	test"Nivel de lucha de rolando"{
-		assert.equals(rolando.nivelDeHabilidadDeLucha(),20)
+		assert.equals(20,rolando.nivelDeHabilidadDeLucha())
 	}
 	
 	test"NL si la armadura tiene bendicion" {
 		armadura.cambiarRefuerzo(refuerzoDeBendicion)
-		assert.equals(armadura.habilidadDeLucha(),58)
+		assert.equals(58,armadura.habilidadDeLucha())
 	}
 	
 	test"NL si tiene cota de malla"{
 		armadura.cambiarRefuerzo(cotaDeMalla)
-		assert.equals(armadura.habilidadDeLucha(),3)
+		assert.equals(3,armadura.habilidadDeLucha())
 	}
 
 	test"NL si la armadura tiene hechizoBasico" {
 		armadura.duenio(rolando)
 		hechizoRefuerzo.hechizoRefuerzo(hechizoBasico)
 		armadura.cambiarRefuerzo(hechizoRefuerzo)
-		assert.equals(armadura.habilidadDeLucha(),12)
+		assert.equals(12,armadura.habilidadDeLucha())
 	}
 
 	test"NL si la armadura tiene espectroMalefico" {
 		armadura.duenio(rolando)
 		hechizoRefuerzo.hechizoRefuerzo(espectroMalefico)
 		armadura.cambiarRefuerzo(hechizoRefuerzo)
-		assert.equals(armadura.habilidadDeLucha(),19)
+		assert.equals(19,armadura.habilidadDeLucha())
 	}
 
 	test"NL si elimina todos los artefactos y agrego espejo" {	
 		rolando.sacarTodosLosArtefactos()
 		rolando.agregaArtefacto(espejo)
-		assert.equals(rolando.nivelDeHabilidadDeLucha(),1)
+		assert.equals(1,rolando.nivelDeHabilidadDeLucha())
 	}
 
 	test"NH con libro de hechizos con Reemplazar al hechizo preferido por un libro de hechizos que contenga el espectro maléfico (con nombre “espectro maléfico”) y al hechizo básico." {
 		libroDeHechizos.agregarHechizo(espectroMalefico)
 		libroDeHechizos.agregarHechizo(hechizoBasico)
 		rolando.hechizoPreferido(libroDeHechizos)
-		assert.equals(rolando.nivelDeHechiceria(), 56)
+		assert.equals(56,rolando.nivelDeHechiceria())
 	}
 	
 	test"NL con armadura extra de base 5 y cota de malla de base 6"{
 		rolando.agregaArtefacto(armaduraExtra)
 		armaduraExtra.cambiarRefuerzo(cotaDeMallaExtra)
-		assert.equals(rolando.nivelDeHabilidadDeLucha(),37)
+		assert.equals(37,rolando.nivelDeHabilidadDeLucha())
 		
 	}
 	
