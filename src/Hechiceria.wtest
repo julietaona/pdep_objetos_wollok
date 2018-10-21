@@ -5,7 +5,8 @@ import artefactos.*
 
 describe "Test Hechiceria" {
 	const rolando = new Personaje()
-	const frio = new Logo(nombreHechizo="Descarga de Escarcha") //testeo de creacion de hechizo
+	const frio = new Logos("Descarga de Escarcha",1)
+	
 	test "Nivel de hechiceria=56" {
 		assert.equals(rolando.nivelDeHechiceria(),56)
 
