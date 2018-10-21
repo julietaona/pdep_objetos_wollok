@@ -5,7 +5,7 @@ import artefactos.*
 
 describe "comercio" {
 
-	const alacachulacachicomula = new Logo("alacachula cachicomula", 1)
+	const alacachulacachicomula = new Logos("alacachula cachicomula", 1)
 	const xenia = new Personaje(hechizoPreferido = alacachulacachicomula)
 	const thor = new Personaje(hechizoPreferido = hechizoBasico)
 	const loki = new Personaje(hechizoPreferido = hechizoBasico, monedas = 5)
