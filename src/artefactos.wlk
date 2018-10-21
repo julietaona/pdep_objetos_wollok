@@ -5,7 +5,7 @@ class Artefacto {
 	var property duenio = null
 
 	method duenio(_duenio) {
-		if (duenio != null) {
+		if (duenio) {
 			duenio.sacarArtefacto(self)
 		}
 		duenio = _duenio
@@ -15,9 +15,6 @@ class Artefacto {
 class Arma inherits Artefacto {
 	var property habilidadDeLucha = 3
 	
-	method habilidadDeLucha(){
-		return habilidadDeLucha
-	}
 	method precio() = self.habilidadDeLucha() * 5
 }
 
