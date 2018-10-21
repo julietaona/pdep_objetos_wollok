@@ -8,36 +8,36 @@ describe "Test Hechiceria" {
 	const frio = new Logos("Descarga de Escarcha",1)
 	
 	test "Nivel de hechiceria=56" {
-		assert.equals(rolando.nivelDeHechiceria(),56)
+		assert.equals(56,rolando.nivelDeHechiceria())
 
 	}
 	test "NH con Espectro Superrecontramalefico muajajaja=125" {
 		espectroMalefico.nombre("espectro superrecontramalefico muajajaja")
-		assert.equals(espectroMalefico.nombre(), "espectro superrecontramalefico muajajaja")
-		assert.equals(rolando.nivelDeHechiceria(),125)
+		assert.equals("espectro superrecontramalefico muajajaja",espectroMalefico.nombre())
+		assert.equals(125,rolando.nivelDeHechiceria())
 	}
 	test "NH con Hechizo Basico como hechizo preferido=35" {
 		rolando.hechizoPreferido(hechizoBasico)
-		assert.equals(rolando.hechizoPreferido(),hechizoBasico)
-		assert.equals(rolando.nivelDeHechiceria(),35)
+		assert.equals(hechizoBasico,rolando.hechizoPreferido())
+		assert.equals(35,rolando.nivelDeHechiceria())
 	}
 	test "NH con 1 eclipse=61" {
 		fuerzaOscura.eclipse()
-		assert.equals(fuerzaOscura.valorFuerzaOscura(),10)
-		assert.equals(rolando.nivelDeHechiceria(),61)
+		assert.equals(10,fuerzaOscura.valorFuerzaOscura())
+		assert.equals(61,rolando.nivelDeHechiceria())
 	}
 	test "Espectro Malefico es poderoso" {
 		assert.that(espectroMalefico.esPoderoso())
 	}
 	test "Espectro Malefico cambiado a pepe no es poderoso"{
 		espectroMalefico.nombre("pepe")
-		assert.equals(espectroMalefico.nombre(), ("pepe"))
+		assert.equals(("pepe"),espectroMalefico.nombre())
 		assert.notThat(espectroMalefico.esPoderoso())
 	}
 	test "Hechizo Basico no es poderoso"{
 		assert.notThat(hechizoBasico.esPoderoso())
 	}
 	test ""{
-		assert.equals(frio.poderHechizo(),45)		//testeo de poder INNECESARIO del nuevo hechizo creado. Siempre va a dar numero aleatorio, es normal que falle
+		assert.equals(45,frio.poderHechizo())		//testeo de poder INNECESARIO del nuevo hechizo creado. Siempre va a dar numero aleatorio, es normal que falle
 	}
 }
