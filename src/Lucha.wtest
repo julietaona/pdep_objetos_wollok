@@ -14,40 +14,40 @@ describe "Testeo de Artefactos"{
 	}
 	test"Nivel de lucha sin artefactos=1"{
 		rolando.sacarTodosLosArtefactos()
-		assert.equals(rolando.nivelDeHabilidadDeLucha(),1)
+		assert.equals(1,rolando.nivelDeHabilidadDeLucha())
 	}
 	test"NL=13"{
-		assert.equals(rolando.nivelDeHabilidadDeLucha(),13)
+		assert.equals(13,rolando.nivelDeHabilidadDeLucha())
 	}
 	test"NL con 3 perlas = 11"{
 		collarDivino.perlas(3)
-		assert.equals(rolando.nivelDeHabilidadDeLucha(),11)
+		assert.equals(11,rolando.nivelDeHabilidadDeLucha())
 	}
 	test"NL con base 8 = 20"{
 		rolando.luchaBase(8)
-		assert.equals(rolando.luchaBase(),8)
-		assert.equals(rolando.nivelDeHabilidadDeLucha(),20)
+		assert.equals(8,rolando.luchaBase())
+		assert.equals(20,rolando.nivelDeHabilidadDeLucha())
 	}
 	test"NL de Mascara Oscura con 1 eclipse =5"{
 		fuerzaOscura.eclipse()
-		assert.equals(fuerzaOscura.valorFuerzaOscura(),10)
-		assert.equals(mascaraOscura.habilidadDeLucha(),5)
+		assert.equals(10,fuerzaOscura.valorFuerzaOscura())
+		assert.equals(5,mascaraOscura.habilidadDeLucha())
 	}
 	test"NL sin Mascara Oscura = 9"{
 		rolando.sacarArtefacto(mascaraOscura)
-		assert.equals(rolando.nivelDeHabilidadDeLucha(),9)
+		assert.equals(9,rolando.nivelDeHabilidadDeLucha())
 	}
 	test"NL<NH"{
 		assert.notThat(rolando.tieneMayorHabilidadDeLuchaQueNivelDeHechiceria())
 	}
 	test "Habilidad de Lucha con Mascara NO Oscura" {
 		mascaraOscura.indiceOscuridad(0)
-		assert.equals(mascaraOscura.habilidadDeLucha(),4)
+		assert.equals(4,mascaraOscura.habilidadDeLucha())
 	}
 
 	test "Habilidad de Lucha con Mascara NO Oscura y valor min 2 " {
 		mascaraOscura.indiceOscuridad(0)
 		mascaraOscura.minimo(2)
-		assert.equals(mascaraOscura.habilidadDeLucha(),2)
+		assert.equals(2,mascaraOscura.habilidadDeLucha())
 	}
 }
