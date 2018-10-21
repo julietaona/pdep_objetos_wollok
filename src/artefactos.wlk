@@ -32,7 +32,7 @@ class Mascara inherits Artefacto{
 	var property minimo = 4
 
 	constructor(_indiceOscuridad) {
-		if (_indiceOscuridad < 0 || _indiceOscuridad > 1) {
+		if (!_indiceOscuridad.between(0,1)) {
 			throw new Exception("El indice de oscuridad "+_indiceOscuridad+" no es valido, tiene que estar entre 0 y 1")
 		}
 		indiceOscuridad = _indiceOscuridad
