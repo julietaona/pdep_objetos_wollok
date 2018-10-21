@@ -1,14 +1,10 @@
-class Logo{
-	var property nombreHechizo
-	var property multiplicador = new Range(1, 10).anyOne()			//sirve para darle un multiplicador aleatorio al nuevo hechizo que creeemos
+class Logos{
+	const property nombreHechizo
+	const property multiplicador
 
-	constructor(unNombreHechizo) {
-		nombreHechizo = unNombreHechizo
-	}
-
-	constructor(unNombreHechizo, unMultiplicador) {
-		nombreHechizo = unNombreHechizo
-		multiplicador = unMultiplicador
+	constructor(_nombreHechizo, _multiplicador) {
+		nombreHechizo = _nombreHechizo
+		multiplicador = _multiplicador
 	}
 	
 	method poderHechizo(){
