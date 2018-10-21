@@ -19,6 +19,7 @@ class Logos{
 
 object espectroMalefico{
 	var property nombre = "Espectro malefico"
+	const property precio = 10
 	
 	method poderHechizo(){
 		return nombre.size()
