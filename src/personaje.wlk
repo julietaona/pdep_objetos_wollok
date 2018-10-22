@@ -29,6 +29,10 @@ class Personaje{
 		artefactos.clear()
 	}
 	
+	method traerTodosLosArtefactosMenosUnArtefacto(_unArtefacto){
+		return artefactos.filter{artefacto => artefacto != _unArtefacto}
+	}
+	
 	method nivelDeHabilidadDeLucha() = luchaBase + self.poderArtefactos()
 	method poderArtefactos() = artefactos.sum{ artefacto => artefacto.habilidadDeLucha() }		//por algun motivo de esta forma no rompe los tests de Lucha
 	
