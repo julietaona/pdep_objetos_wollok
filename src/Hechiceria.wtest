@@ -23,7 +23,7 @@ describe "Test Hechiceria" {
 	}
 	test "NH con 1 eclipse=61" {
 		fuerzaOscura.eclipse()
-		assert.equals(10,fuerzaOscura.valorFuerzaOscura())
+		assert.equals(10,fuerzaOscura.valor())
 		assert.equals(61,rolando.nivelDeHechiceria())
 	}
 	test "Espectro Malefico es poderoso" {
