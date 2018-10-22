@@ -3,13 +3,6 @@ import hechizos.*
 
 class Artefacto {
 	var property duenio = null
-
-	method duenio(_duenio) {
-		if (duenio) {
-			duenio.sacarArtefacto(self)
-		}
-		duenio = _duenio
-	}
 }
 
 class Arma inherits Artefacto {
