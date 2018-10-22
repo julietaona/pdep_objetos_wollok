@@ -29,8 +29,6 @@ class Personaje{
 		artefactos.clear()
 	}
 	
-	method sinArtefactos(unArtefacto) = self.artefactos().filter({ artefacto => artefacto != unArtefacto })
-	
 	method nivelDeHabilidadDeLucha() = luchaBase + self.poderArtefactos()
 	method poderArtefactos() = artefactos.sum{ artefacto => artefacto.habilidadDeLucha() }		//por algun motivo de esta forma no rompe los tests de Lucha
 	
@@ -45,13 +43,7 @@ class Personaje{
 	method estaCargado() {
 		return (artefactos.size() >= 5)
 	}
-	
-	method artefactoConHabilidadDeLuchaMax()
-	{
-		return artefactos.max({unArtefacto => unArtefacto.habilidadDeLucha(self)}).habilidadDeLucha(self)
-	}
-	
-	
+
 	method validarCompra(montoCompra, monedasDisponibles) {
 		if (montoCompra > monedasDisponibles) {
 			throw new Exception("No tiene monedas suficientes")
