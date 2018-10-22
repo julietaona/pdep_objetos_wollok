@@ -30,7 +30,7 @@ describe "Testeo de Artefactos"{
 	}
 	test"NL de Mascara Oscura con 1 eclipse =5"{
 		fuerzaOscura.eclipse()
-		assert.equals(10,fuerzaOscura.valorFuerzaOscura())
+		assert.equals(10,fuerzaOscura.valor())
 		assert.equals(5,mascaraOscura.habilidadDeLucha())
 	}
 	test"NL sin Mascara Oscura = 9"{
