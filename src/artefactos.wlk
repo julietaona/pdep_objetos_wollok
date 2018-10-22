@@ -31,19 +31,17 @@ class Mascara inherits Artefacto{
 		indiceOscuridad = _indiceOscuridad
 	}
 
-	method habilidadDeLucha()=((fuerzaOscura.valorFuerzaOscura() / 2) * indiceOscuridad).max(minimo)
+	method habilidadDeLucha()=((fuerzaOscura.valor() / 2) * indiceOscuridad).max(minimo)
 }
 
 class Armadura inherits Artefacto {
 	var property refuerzo = sinRefuerzo
 	const property poderDeLuchaBase = 1
 
-	method cambiarRefuerzo(unRefuerzo) {		//un setter para modificar el refuerzo
-		refuerzo = unRefuerzo
-	}
 	method habilidadDeLucha() = poderDeLuchaBase + self.valorDeRefuerzo()
 	method valorDeRefuerzo() = refuerzo.valorDeRefuerzo(self)
 	method precio() = refuerzo.precioRefuerzo(self)
+	method nivelHechiceriaDuenio() = duenio.nivelDeHechiceria()
 	
 }
 object sinRefuerzo{
@@ -64,7 +62,7 @@ class RefuerzoDeCotaDeMalla{
 
 object refuerzoDeBendicion {
 
-	method valorDeRefuerzo(armadura) = armadura.duenio().nivelDeHechiceria()
+	method valorDeRefuerzo(armadura) = armadura.nivelHechiceriaDuenio()
 	method precioRefuerzo(armadura) = armadura.poderDeLuchaBase()
 
 }

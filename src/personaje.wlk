@@ -5,13 +5,13 @@ import artefactos.*
 class Personaje{
 	
 	var property valorBase 						= 3
-	var property hechizoPreferido 				        = espectroMalefico
+	var property hechizoPreferido 				= espectroMalefico
 	var property artefactos 					= #{}
 	var property luchaBase 						= 1
 	var property monedas 						= 100
 	
 	method nivelDeHechiceria(){
-		return (valorBase * hechizoPreferido.poderHechizo()) + fuerzaOscura.valorFuerzaOscura()
+		return (valorBase * hechizoPreferido.poderHechizo()) + fuerzaOscura.valor()
 	}
 	
 	method agregaArtefacto(unArtefacto){
