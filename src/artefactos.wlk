@@ -90,7 +90,7 @@ object hechizoNulo {
 class Espejo inherits Artefacto {
 	
 	method habilidadDeLucha() {
-		const artefactos = duenio.sinArtefactos(self)
+		const artefactos = duenio.traerTodosLosArtefactosMenosUnArtefacto(self)
 		if (artefactos.size() == 0) {
 			return 0
 		}
