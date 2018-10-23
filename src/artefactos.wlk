@@ -42,7 +42,9 @@ class Armadura inherits Artefacto {
 	method valorDeRefuerzo() = refuerzo.valorDeRefuerzo(self)
 	method precio() = refuerzo.precioRefuerzo(self)
 	method nivelHechiceriaDuenio() = duenio.nivelDeHechiceria()
-	
+	method cambiarRefuerzo(unRefuerzo) {
+		refuerzo = unRefuerzo 
+	} 
 }
 object sinRefuerzo{
 	method valorDeRefuerzo(armadura) = 0
