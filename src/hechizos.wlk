@@ -1,39 +1,65 @@
-class Logos{
-	const property nombreHechizo
-	const property multiplicador
+class Hechizo {
+
+	method esPoderoso() = self.poderHechizo() > 15
+
+	method poderHechizo()
+
+	method precio() = self.poderHechizo()
+
+	method calcularPeso() = 0
+
+}
+
+object hechizoBasico inherits Hechizo {
+
+	override method poderHechizo() = 10
+
+	override method esPoderoso() = false
+
+}
+
+object hechizoNulo {
+
+	const property poderHechizo = 0
+
+}
+
+class Logo inherits Hechizo {
+
+	var property nombreHechizo
+	var property multiplicador = new Range(1, 10).anyOne()
+
+	constructor(_nombreHechizo) {
+		nombreHechizo = _nombreHechizo
+	}
 
 	constructor(_nombreHechizo, _multiplicador) {
 		nombreHechizo = _nombreHechizo
 		multiplicador = _multiplicador
 	}
-	
-	method poderHechizo(){
-		return nombreHechizo.size() * multiplicador
-	}
-	
-	method esPoderoso(){
-		return self.poderHechizo() > 15
-	}
-	method precio() = self.poderHechizo()
+
+	override method poderHechizo() = nombreHechizo.length() * self.factorMultiplicador()
+
+	method factorMultiplicador() = self.multiplicador()
+
 }
 
-object espectroMalefico{
-	var property nombre = "Espectro malefico"
-	const property precio = 10
-	
-	method poderHechizo(){
-		return nombre.size()
-	}
-	
-	method esPoderoso(){
-		return self.poderHechizo() > 15
-	}
+object espectroMalefico inherits Logo("espectro malefico") {
+
+	override method poderHechizo() = nombreHechizo.length()
+
 }
 
-object hechizoBasico{
-	var property poderHechizo = 10
-	var property esPoderoso = false
-	const property precio = 10
+class HechizoComercial inherits Logo {
+
+	var property porcentaje
+
+	constructor(_nombre, _multiplicador, _porcentaje) = super(_nombre, _multiplicador) {
+		porcentaje = _porcentaje
+	}
+
+	override method factorMultiplicador() = (self.porcentaje() / 100) * self.multiplicador()
+
 }
 
 class LibroDeHechizos
@@ -53,3 +79,4 @@ class LibroDeHechizos
 		
 	method precio() = (hechizos.size() * 10) + self.poderHechizo()
 }
+

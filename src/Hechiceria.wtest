@@ -5,15 +5,20 @@ import artefactos.*
 
 describe "Test Hechiceria" {
 	const rolando = new Personaje()
-	const frio = new Logos("Descarga de Escarcha",1)
+	const furibunda = new Personaje()
+	const hechizoComercial = new hechizos.HechizoComercial("el hechizo comercial", 2, 20)
+	const espectroMaleficoLogo = new hechizos.Logo ("espectro Malefico",3)
+	
+	fixture {
+		furibunda.hechizoPreferido(hechizoComercial)	
+	}
 	
 	test "Nivel de hechiceria=56" {
 		assert.equals(56,rolando.nivelDeHechiceria())
-
 	}
 	test "NH con Espectro Superrecontramalefico muajajaja=125" {
-		espectroMalefico.nombre("espectro superrecontramalefico muajajaja")
-		assert.equals("espectro superrecontramalefico muajajaja",espectroMalefico.nombre())
+		espectroMalefico.nombreHechizo("espectro superrecontramalefico muajajaja")
+		assert.equals("espectro superrecontramalefico muajajaja",espectroMalefico.nombreHechizo())
 		assert.equals(125,rolando.nivelDeHechiceria())
 	}
 	test "NH con Hechizo Basico como hechizo preferido=35" {
@@ -30,14 +35,21 @@ describe "Test Hechiceria" {
 		assert.that(espectroMalefico.esPoderoso())
 	}
 	test "Espectro Malefico cambiado a pepe no es poderoso"{
-		espectroMalefico.nombre("pepe")
-		assert.equals(("pepe"),espectroMalefico.nombre())
+		espectroMalefico.nombreHechizo("pepe")
+		assert.equals(("pepe"),espectroMalefico.nombreHechizo())
 		assert.notThat(espectroMalefico.esPoderoso())
 	}
 	test "Hechizo Basico no es poderoso"{
 		assert.notThat(hechizoBasico.esPoderoso())
 	}
-	test ""{
-		assert.equals(45,frio.poderHechizo())		//testeo de poder INNECESARIO del nuevo hechizo creado. Siempre va a dar numero aleatorio, es normal que falle
+
+	test "NH de Furibunda"{
+		assert.equals(29,furibunda.nivelDeHechiceria())
+	}
+	test "Hechizo comercial no es poderoso"{
+		assert.notThat(hechizoComercial.esPoderoso())
+	}
+	test "Espectro malefico es poderoso"{
+		assert.that(espectroMaleficoLogo.esPoderoso())
 	}
 }
