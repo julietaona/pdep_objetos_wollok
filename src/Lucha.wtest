@@ -5,12 +5,10 @@ import artefactos.*
 
 describe "Testeo de Artefactos"{
 	const rolando = new Personaje()
-	const espadaDestino = new Arma()
-	const mascaraOscura = new Mascara(1)
+	const espadaDestino = new Arma(0)
+	const mascaraOscura = new Mascara(1,0)
 	fixture {
-		rolando.agregaArtefacto(collarDivino)
-		rolando.agregaArtefacto(espadaDestino)
-		rolando.agregaArtefacto(mascaraOscura)
+		rolando.agregarArtefactos([ espadaDestino, mascaraOscura, collarDivino ])
 	}
 	test"Nivel de lucha sin artefactos=1"{
 		rolando.sacarTodosLosArtefactos()

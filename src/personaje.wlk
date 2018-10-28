@@ -9,6 +9,7 @@ class Personaje{
 	var property artefactos 					= #{}
 	var property luchaBase 						= 1
 	var property monedas 						= 100
+	const limiteDePeso = 200
 	
 	method nivelDeHechiceria(){
 		return (valorBase * hechizoPreferido.poderHechizo()) + fuerzaOscura.valor()
@@ -70,4 +71,13 @@ class Personaje{
 	method objetivoCumplido() {
 		monedas = self.monedas() + 10
 	}
+	
+	method validarPeso(artefacto) {
+		if (limiteDePeso < artefacto.calcularPeso() + self.pesoTotal()) {
+			throw new Exception("No soporta el peso")
+		}
+	}
+
+	method pesoTotal() = artefactos.sum{ artefacto => artefacto.peso() }
+	
 }

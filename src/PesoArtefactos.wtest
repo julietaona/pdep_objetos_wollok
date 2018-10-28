@@ -1,0 +1,73 @@
+import personaje.*
+import fuerzaOscura.*
+import hechizos.*
+import artefactos.*
+
+
+describe "Peso de los Artefactos"{
+	const espadaVieja = new Arma(7)
+	const espadaNueva = new Arma(4)
+	const espadaComun = new Arma(5)
+	const mascaraOscura = new Mascara(peso = 3, indiceOscuridad = 1, minimo = 0)
+	const mascaraClara = new Mascara(peso = 2, indiceOscuridad = 0, minimo = 0)
+	const armaduraReforzada = new Armadura(10)
+	const cotaDeMalla = new RefuerzoDeCotaDeMalla(1)
+	const armaduraMagica = new Armadura(12)
+	const hechizoPar = new HechizoComercial("el hechizo comercial", 2, 20)
+	const hechizoParRefuerzo = new RefuerzoDeHechizo()
+	const hechizoImparRefuerzo = new RefuerzoDeHechizo() //
+	const armadura = new Armadura(12)
+	
+	fixture {
+		espadaVieja.fechaCompra(new Date(7, 5, 2016))
+		espadaComun.fechaCompra((new Date()).minusDays(50))
+		hechizoParRefuerzo.hechizoRefuerzo(hechizoPar)
+		hechizoImparRefuerzo.hechizoRefuerzo(espectroMalefico)
+		armaduraReforzada.refuerzo(cotaDeMalla)
+	}
+	test "Peso de espada vieja" {
+		assert.equals(6, espadaVieja.calcularPeso())
+	}
+	test "Peso de Espada Nueva" {
+		assert.equals(4, espadaNueva.calcularPeso())
+	}
+	test "Peso de Espada Comun" {
+		assert.equals(4.5, espadaComun.calcularPeso())
+	}
+
+	test "Peso de Collar Divino" {
+		assert.equals(2.5, collarDivino.calcularPeso())
+	}
+
+	test "Peso de Mascara Osucura" {
+		assert.equals(3, mascaraOscura.calcularPeso())
+	}
+
+	test "Peso de Mascara Oscura luego de un Eclipse" {
+		fuerzaOscura.eclipse()
+		assert.equals(5, mascaraOscura.calcularPeso())
+	}
+
+	test "Peso mascara clara" {
+		assert.equals(2, mascaraClara.calcularPeso())
+	}
+
+	test "Peso de Armadura con cota de malla" {
+		assert.equals(11, armaduraReforzada.calcularPeso())
+	}
+
+	test "Peso de Armadura con hechizo par" {
+		armaduraMagica.refuerzo(hechizoParRefuerzo)
+		assert.equals(14, armaduraMagica.calcularPeso())
+	}
+
+	test "Peso de Armadura con hechizo impar" {
+		armaduraMagica.refuerzo(hechizoImparRefuerzo)
+		assert.equals(13, armaduraMagica.calcularPeso())
+	}
+
+	test "Peso de Armadura sin refuerzo" {
+		assert.equals(12, armadura.calcularPeso())
+	}
+	
+}
