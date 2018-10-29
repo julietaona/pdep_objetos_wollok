@@ -1,12 +1,21 @@
 class Comerciante{
   var porperty tipo
-  var property comision
-  var property impuestoGanancias
-  var property minNoImponible
   var artefactos = []
 
   method recategorizacionCompulsiva(unImpuesto){
-    tipo.recategorizacion(unImpuesto)
+    if(tipo == independiente){
+	tipo.duplicarComision() 
+	
+	if(tipo.comision() > 21){
+	   tipo = registrado
+	}
+    }
+    else
+    {
+    	if(tipo == registrado){
+	    tipo = conImpuestoALasGanacias
+	}
+    }
   }
   
   method vender(unasMonedas, unArtefacto){
@@ -29,12 +38,11 @@ class Comerciante{
   }
 }
 
-object independiente inherits Comerciante{
-
-  method recategorizacion(){
-    if(comision > 21){
-      comision = comision * 2
-    }
+object independiente{
+  var property comision
+  
+  method duplicarComision(){
+  	comision = comision * 2
   }
   
   method recargo(unPrecio){
@@ -43,22 +51,16 @@ object independiente inherits Comerciante{
   
 }
 
-object registrado inherits Comerciante{
-  method recategorizacion(unImpuesto){
-    impuestoGanancias = unImpuesto
-  }
-  
+object registrado{
   method recargo(unPrecio){
     return unPrecio * 1.21
   }
 }
 
-object conImpuestoALasGanacias inherits Comerciante{ 
-  method recargo(unPrecio){
-    if(minNoImponible - unPrecio < 0){
-      return unPrecio + ((unPrecio - minNoImponible) * 1.35)
-    }
-  }
-  
-  method recategorizacion(){}
+object conImpuestoALasGanacias{
+  var property minNoImponible 
+	method recargo(unPrecio){
+	    if(minNoImponible - unPrecio < 0){
+	      return unPrecio + ((unPrecio - minNoImponible) * 1.35)
+	}
 }
