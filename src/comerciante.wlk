@@ -51,7 +51,7 @@ object independiente{
   }
   
   method recargo(unPrecio){
-    return unPrecio + comision
+    return unPrecio + ((unPrecio * comision)/100)
   }
   
 }
