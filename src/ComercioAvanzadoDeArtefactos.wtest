@@ -1,0 +1,4 @@
+import personaje.*
+import hechizos.*
+import fuerzaOscura.*
+import artefactos.*
