@@ -80,4 +80,11 @@ class Personaje{
 
 	method pesoTotal() = artefactos.sum{ artefacto => artefacto.peso() }
 	
+	method quiereComprarA(unVendedor, unArtefacto){
+		self.validarPeso(unArtefacto)
+		monedas = monedas - unVendedor.vender(monedas, unArtefacto)
+		self.agregaArtefacto(unArtefacto)
+	}
+	
+	
 }
