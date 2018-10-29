@@ -17,6 +17,9 @@ describe "Peso de los Artefactos"{
 	const hechizoParRefuerzo = new RefuerzoDeHechizo()
 	const hechizoImparRefuerzo = new RefuerzoDeHechizo() //
 	const armadura = new Armadura(12)
+	const mockHnos = new Personaje()
+	const merlin   = new Personaje(monedas = 100, limiteDePeso = 10)
+	const ursula   = new Personaje(monedas = 100, artefactos = #{mascaraOscura, cotaDeMalla}, limiteDePeso = 200)
 	
 	fixture {
 		espadaVieja.fechaCompra(new Date(7, 5, 2016))
@@ -69,5 +72,17 @@ describe "Peso de los Artefactos"{
 	test "Peso de Armadura sin refuerzo" {
 		assert.equals(12, armadura.calcularPeso())
 	}
+	
+	test "Peso total que carga Merlín luego de comprar a Mock Hnos. la máscara clara y la oscura (sin que haya eclipse) "{
+		assert.equals(5,)
+	}
+	
+	test "Merlín le quiere comprar a Mock Hnos. la armadura con hechizo par"{
+		assert.equals(false,)
+	}
+	
+	test "Peso total de Ursula, luego de desprenderse de la armadura con cota de malla"{
+		assert.equals(3,)
+	} 
 	
 }
