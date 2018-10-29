@@ -32,7 +32,7 @@ class Arma inherits Artefacto {
 	constructor(_peso) = super(_peso)
 
 	method poderDeLucha() = habilidadDeLucha
-	method precio() = self.habilidadDeLucha() * 5
+	method precio() = peso * 5
 }
 
 object collarDivino inherits Artefacto(0){	
