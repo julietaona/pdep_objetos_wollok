@@ -1,3 +1,8 @@
+import personaje.*
+import hechizos.*
+import fuerzaOscura.*
+import artefactos.*
+
 class Comerciante{
   var porperty tipo
   var artefactos = []
