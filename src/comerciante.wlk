@@ -9,8 +9,8 @@ class Comerciante{
     tipo.recategorizacion(unImpuesto)
   }
   
-  method vender(unArtefacto){
-    self.validarVenta(unArtefacto)
+  method vender(unasMonedas, unArtefacto){
+    self.validarVenta(unasMonedas, unArtefacto)
 		return self.precioVenta(unArtefacto)
   }
   
@@ -18,9 +18,13 @@ class Comerciante{
     return tipo.recargo(unArtefacto.precio()) 
   }
   
-  method validarVenta(unArtefacto){
+  method validarVenta(unasMonedas, unArtefacto){
     if(artefactos.filter{artefacto => artefacto == unArtefcato}){
-      throw new Exception("No tiene el producto que se solicita")
+      	throw new Exception("No tiene el producto que se solicita")
+    }
+    
+    if((unasMonedas - self.precioVenta(unArtefacto)) < 0){
+    	throw new Exception("No le alcanzan las monedas")	
     }
   }
 }
