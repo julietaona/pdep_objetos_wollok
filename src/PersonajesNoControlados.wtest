@@ -1,0 +1,25 @@
+import personajeNoControlado.*
+import hechizos.*
+import fuerzaOscura.*
+import artefactos.*
+
+describe "Test Personaje no controlado" {
+
+const mascaraClara = new Mascara(peso = 2, indiceOscuridad = 0, minimo = 0)
+const navi = new PersonajeNoControlado(nivelEnElJuego = facil)
+const ashleyGraham = new PersonajeNoControlado(nivelEnElJuego = moderado, luchaBase = 5, artefactos = #{mascaraClara})
+
+test "Habilidad para la lucha de Navi"{
+assert.equals(1, navi.nivelDeHabilidadDeLucha())
+}
+
+test "Habilidad para la lucha de Ashley Graham"{
+assert.equals(18, ashleyGraham.nivelDeHabilidadDeLucha())
+}
+
+test "Habilidad para la lucha de Ashley Graham con dificultad dificil"{
+ashleyGraham.nivelEnElJuego(dificil)
+assert.equals(36, ashleyGraham.nivelDeHabilidadDeLucha())
+}
+
+}
