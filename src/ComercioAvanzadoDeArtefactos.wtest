@@ -2,3 +2,20 @@ import personaje.*
 import hechizos.*
 import fuerzaOscura.*
 import artefactos.*
+
+describe "comercioAvanzadoDeArtefactos" {
+
+	const pastoriza = new Comerciante(tipo = independiente , comision = 9)
+	const prieto = new Comerciante(tipo = registrado)
+  const conImpuestoALasGanacias = conImpuestoALasGanacias(minNoImponible = 5)
+	const fermepin = new Comerciante(tipo = conImpuestoALasGanacias)
+  
+  test "Ursula comienza con 100 monedas. Luego compra la máscara oscura a Pastoriza." 
+  {
+    const mascaraOscura = new Mascara(peso = 3, indiceOscuridad = 1, minimo = 0)
+    ursula = new Personaje(monedas = 100)
+    ursula.comprarA(pastoriza, mascaraOscura)
+		assert.equals(89,1,ursula.monedas())
+	}
+
+}
