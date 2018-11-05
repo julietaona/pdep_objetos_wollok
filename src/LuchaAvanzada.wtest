@@ -5,14 +5,14 @@ import artefactos.*
 
 describe "Testeo armadura"{
 	const rolando = new Personaje()
-	const espadaDestino = new Arma()
-	const mascaraOscura = new Mascara(1)
+	const espadaDestino = new Arma(0)
+	const mascaraOscura = new Mascara(1, 0)
 	const espejo = new Espejo()
 	const libroDeHechizos = new LibroDeHechizos()
-	const armadura = new Armadura(poderDeLuchaBase = 2)
+	const armadura = new Armadura(poderDeLuchaBase = 2, peso = 0)
 	const cotaDeMalla = new RefuerzoDeCotaDeMalla(1)
 	const hechizoRefuerzo = new RefuerzoDeHechizo()
-	const armaduraExtra = new Armadura(poderDeLuchaBase = 5)
+	const armaduraExtra = new Armadura(poderDeLuchaBase = 5, peso = 0)
 	const cotaDeMallaExtra = new RefuerzoDeCotaDeMalla(6)
 	
 	fixture {

@@ -1,19 +1,15 @@
 class Nivel{
-  var property magnitud
-
-  method constructor(_magnitud){
+ var property magnitud
+  constructor(_magnitud){
     magnitud = _magnitud
   }
 }
 
-object facil inherits Nivel{
-  magnitud(0)
+object facil inherits Nivel(0){
 }
 
-object moderado inherits Nivel{
-  magnitud(2)
+object moderado inherits Nivel(2){
 }
 
-object dificil inherits Nivel{
-  magnitud(4)
+object dificil inherits Nivel(4){
 }

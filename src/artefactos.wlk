@@ -2,7 +2,6 @@ import fuerzaOscura.*
 import hechizos.*
 
 class Artefacto {
-	var property duenio = null
 	var property peso
 	var property fechaCompra = new Date()
 
@@ -10,20 +9,13 @@ class Artefacto {
 		peso = _peso
 	}
 
-	method poseedor(_duenio) {
-		if (duenio != null) {
-			duenio.eliminarArtefacto(self)
-		}
-		duenio = _duenio
-	}
-
 	method calcularPeso() = self.peso() - self.desgaste()
 
 	method desgaste() = ((new Date() - fechaCompra) / 100).min(1)
 
-	method peso() = peso + self.pesoAgregado()
+	method peso(duenio) = peso + self.pesoAgregado(duenio)
 
-	method pesoAgregado() = 0
+	method pesoAgregado(duenio) = 0
 }
 
 class Arma inherits Artefacto {
@@ -38,9 +30,9 @@ class Arma inherits Artefacto {
 object collarDivino inherits Artefacto(0){	
 	var property perlas = 5
 
-	method habilidadDeLucha() = perlas
+	method habilidadDeLucha(duenio) = perlas
 	method precio() = self.perlas() * 2
-	override method pesoAgregado() = (0.5 * self.perlas())
+	override method pesoAgregado(duenio) = (0.5 * self.perlas())
 }
 
 class Mascara inherits Artefacto{
@@ -54,9 +46,9 @@ class Mascara inherits Artefacto{
 		indiceOscuridad = _indiceOscuridad
 	}
 
-	method habilidadDeLucha() = ((fuerzaOscura.valor() / 2) * indiceOscuridad).max(minimo)
+	method habilidadDeLucha(duenio) = ((fuerzaOscura.valor() / 2) * indiceOscuridad).max(minimo)
 	method precio() = 10 * self.indiceOscuridad()
-	override method pesoAgregado() = ((self.habilidadDeLucha() - 3).max(0))
+	override method pesoAgregado(duenio) = ((self.habilidadDeLucha(duenio) - 3).max(0))
 }
 
 class Armadura inherits Artefacto {
@@ -69,10 +61,10 @@ class Armadura inherits Artefacto {
 		refuerzo = _refuerzo
 	}
 	method valorDeRefuerzo() = refuerzo.valorDeRefuerzo(self)
-	method nivelHechiceriaDuenio() = duenio.nivelDeHechiceria()
+	method nivelHechiceriaDuenio(duenio) = duenio.nivelDeHechiceria()
 	method habilidadDeLucha() = poderDeLuchaBase + self.valorDeRefuerzo()
 	method precio() = refuerzo.precioRefuerzo(self)
-	override method pesoAgregado() = refuerzo.peso()
+	override method pesoAgregado(duenio) = refuerzo.peso()
 }
 class RefuerzoLiviano {
 	method peso() = 0
@@ -110,7 +102,7 @@ class RefuerzoDeHechizo {
 class Espejo inherits Artefacto {
 	constructor() = super(0)
 	
-	method habilidadDeLucha() {
+	method habilidadDeLucha(duenio) {
 		const artefactos = duenio.traerTodosLosArtefactosMenosUnArtefacto(self)
 		if (artefactos.size() == 0) {
 			return 0

@@ -4,23 +4,25 @@ import fuerzaOscura.*
 import artefactos.*
 
 class Comerciante{
-  var porperty tipo
-  var artefactos = []
+  var property tipo
+  var property artefactos = []
+  var property comision = 0
 
   method recategorizacionCompulsiva(unImpuesto){
-    if(tipo == independiente){
-	tipo.duplicarComision() 
-	
-	if(tipo.comision() > 21){
-	   tipo = registrado
+    if (tipo == independiente) {
+			tipo.duplicarComision()
+			if (tipo.comision() > 21) {
+				tipo = registrado
+			}
+		} else {
+			if (tipo == registrado) {
+				tipo = conImpuestoALasGanacias
+			}
+		}
 	}
-    }
-    else
-    {
-    	if(tipo == registrado){
-	    tipo = conImpuestoALasGanacias
-	}
-    }
+  
+  method recategorizar(){
+  	tipo.recategorizar(self)
   }
   
   method vender(unasMonedas, unArtefacto){
@@ -33,7 +35,7 @@ class Comerciante{
   }
   
   method validarVenta(unasMonedas, unArtefacto){
-    if(artefactos.filter{artefacto => artefacto == unArtefcato}){
+    if(artefactos.contains(unArtefacto)){
       	throw new Exception("No tiene el producto que se solicita")
     }
     
@@ -63,9 +65,10 @@ object registrado{
 }
 
 object conImpuestoALasGanacias{
-  var property minNoImponible 
+  var property minNoImponible = 0   
 	method recargo(unPrecio){
 	    if(minNoImponible - unPrecio < 0){
-	      return unPrecio + ((unPrecio - minNoImponible) * 1.35)
+	      return unPrecio + ((unPrecio - minNoImponible) * 1.35)}
+	      else{return 0}
 	}
 }

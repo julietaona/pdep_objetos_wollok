@@ -9,13 +9,13 @@ describe "comercio" {
 	const xenia = new Personaje(hechizoPreferido = alacachulacachicomula)
 	const thor = new Personaje(hechizoPreferido = hechizoBasico)
 	const loki = new Personaje(hechizoPreferido = hechizoBasico, monedas = 5)
-	const espada = new Arma()
-	const armaduraSinRefuerzo = new Armadura(refuerzo = sinRefuerzo)
+	const espada = new Arma(0)
+	const armaduraSinRefuerzo = new Armadura(refuerzo = sinRefuerzo,peso=0)
 	const cotaDeMalla = new RefuerzoDeCotaDeMalla(5)
-	const armaduraConCotaDeMalla = new Armadura(refuerzo = cotaDeMalla)
-	const armaduraConBendicion = new Armadura(refuerzo = refuerzoDeBendicion, poderDeLuchaBase = 2)
+	const armaduraConCotaDeMalla = new Armadura(refuerzo = cotaDeMalla,peso=0)
+	const armaduraConBendicion = new Armadura(refuerzo = refuerzoDeBendicion, poderDeLuchaBase = 2,peso=0)
 	const refuerzoAlacachula = new RefuerzoDeHechizo(hechizoRefuerzo = alacachulacachicomula)
-	const armaduraConAlacachula = new Armadura(refuerzo = refuerzoAlacachula, poderDeLuchaBase = 2)
+	const armaduraConAlacachula = new Armadura(refuerzo = refuerzoAlacachula, poderDeLuchaBase = 2,peso=0)
 	const libroDeHechizos = new LibroDeHechizos()
 	const espejo = new Espejo()
 
@@ -48,7 +48,7 @@ describe "comercio" {
 		xenia.adquirirArtefacto(collarDivino)
 		xenia.adquirirArtefacto(armaduraSinRefuerzo)
 		xenia.adquirirArtefacto(armaduraConCotaDeMalla)
-		assert.equals(70.5,xenia.monedas())
+		assert.equals(85.5,xenia.monedas())
 	}
 
 	test "Cantidad de artefactos luego de hacer varias compras" {

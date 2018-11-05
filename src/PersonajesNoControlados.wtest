@@ -1,3 +1,4 @@
+import nivel.*
 import personajeNoControlado.*
 import hechizos.*
 import fuerzaOscura.*

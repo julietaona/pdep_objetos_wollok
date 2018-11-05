@@ -2,6 +2,7 @@ import personaje.*
 import fuerzaOscura.*
 import hechizos.*
 import artefactos.*
+import comerciante.*
 
 
 describe "Peso de los Artefactos"{
@@ -17,7 +18,8 @@ describe "Peso de los Artefactos"{
 	const hechizoParRefuerzo = new RefuerzoDeHechizo()
 	const hechizoImparRefuerzo = new RefuerzoDeHechizo() //
 	const armadura = new Armadura(12)
-	const mockHnos = new Comerciante(tipo = independiente, comision = 0)
+	const indep = independiente
+	const mockHnos = new Comerciante(tipo = indep)
 	const merlin   = new Personaje(monedas = 100, limiteDePeso = 10)
 	const ursula   = new Personaje(monedas = 100, artefactos = #{mascaraOscura, cotaDeMalla}, limiteDePeso = 200)
 	
@@ -81,7 +83,7 @@ describe "Peso de los Artefactos"{
 	
 	test "Merlín le quiere comprar a Mock Hnos. la armadura con hechizo par"{
 		armaduraMagica.refuerzo(hechizoParRefuerzo)
-		merlin.quiereComprarA(mockHnos, armaduraMagica)
+		assert.throwsExceptionWithMessage("No soporta el peso",merlin.quiereComprarA(mockHnos, armaduraMagica))
 	}
 	
 	test "Peso total de Ursula, luego de desprenderse de la armadura con cota de malla"{
