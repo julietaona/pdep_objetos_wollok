@@ -11,12 +11,10 @@ class Personaje{
 	var property monedas 						= 100
 	const limiteDePeso = 200
 	
-	method nivelDeHechiceria(){
-		return (valorBase * hechizoPreferido.poderHechizo()) + fuerzaOscura.valor()
-	}
+	method nivelDeHechiceria() = (valorBase * hechizoPreferido.poderHechizo()) + fuerzaOscura.valor()
 	
 	method agregaArtefacto(unArtefacto){
-		unArtefacto.duenio(self)
+		unArtefacto.poseedor(self)
 		artefactos.add(unArtefacto)
 	}
 	method agregarArtefactos(unosArtefactos) {
@@ -30,24 +28,16 @@ class Personaje{
 		artefactos.clear()
 	}
 	
-	method traerTodosLosArtefactosMenosUnArtefacto(_unArtefacto){
-		return artefactos.filter{artefacto => artefacto != _unArtefacto}
-	}
+	method traerTodosLosArtefactosMenosUnArtefacto(_unArtefacto) = artefactos.filter{artefacto => artefacto != _unArtefacto}
 	
 	method nivelDeHabilidadDeLucha() = luchaBase + self.poderArtefactos()
-	method poderArtefactos() = artefactos.sum{ artefacto => artefacto.habilidadDeLucha() }		//por algun motivo de esta forma no rompe los tests de Lucha
+	method poderArtefactos() = artefactos.sum{ artefacto => artefacto.habilidadDeLucha() }
 	
-	method tieneMayorHabilidadDeLuchaQueNivelDeHechiceria(){
-		return self.nivelDeHabilidadDeLucha() > self.nivelDeHechiceria()
-	}
+	method tieneMayorHabilidadDeLuchaQueNivelDeHechiceria() = self.nivelDeHabilidadDeLucha() > self.nivelDeHechiceria()
 	
-	method seCreePoderoso() {
-		return hechizoPreferido.esPoderoso()
-	}
+	method seCreePoderoso() = hechizoPreferido.esPoderoso()
 	
-	method estaCargado() {
-		return (artefactos.size() >= 5)
-	}
+	method estaCargado() = artefactos.size() >= 5
 
 	method validarCompra(montoCompra, monedasDisponibles) {
 		if (montoCompra > monedasDisponibles) {
