@@ -1,11 +1,14 @@
-import nivel.*
 import personaje.*
 
-class PersonajeNoControlado inherits Personaje{
-  var property nivelEnElJuego
+class PersonajeNoControlado inherits Personaje {
+  var property dificultad
   
-  override method nivelDeHabilidadDeLucha(){
-    return luchaBase + self.poderArtefactos() * nivelEnElJuego.magnitud()
-  }
+  override method nivelDeHabilidadDeLucha() = dificultad.magnitud() * (luchaBase + self.poderArtefactos())
 }
 
+class Dificultad {
+ const property magnitud
+  constructor(_magnitud){
+    magnitud = _magnitud
+  }
+}

@@ -8,7 +8,7 @@ describe "comercioAvanzadoDeArtefactos" {
 	const mascaraOscura = new Mascara(peso = 3, indiceOscuridad = 1, minimo = 0)
 	const pastoriza = new Comerciante(tipo = independiente , comision = 9, artefactos = [mascaraOscura])
 	const prieto = new Comerciante(tipo = registrado, artefactos = [mascaraOscura])
-        const conImpuestoALasGanacias = conImpuestoALasGanacias(minNoImponible = 5)
+    const conImpuestoALasGanacias = conImpuestoALasGanacias(minNoImponible = 5)
 	const fermepin = new Comerciante(tipo = conImpuestoALasGanacias)
 	const ursula = new Personaje(monedas = 100)
   
