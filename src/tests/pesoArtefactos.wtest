@@ -1,8 +1,13 @@
-import personaje.*
-import fuerzaOscura.*
-import hechizos.*
-import artefactos.*
-import comerciante.*
+import personajes.personaje_class.*
+import personajes.personajeNoControlado_class.*
+import hechizos.hechizo_class.*
+import hechizos.logo_class.*
+import hechizos.hechizos.*
+import fuerzaOscura.fuerzaOscura.*
+import artefactos.artefacto_class.*
+import artefactos.artefactos.*
+import artefactos.arma_class.*
+import comerciantes.comerciante_class.*
 
 
 describe "Peso de los Artefactos"{
@@ -12,22 +17,17 @@ describe "Peso de los Artefactos"{
 	const mascaraOscura = new Mascara(peso = 3, indiceOscuridad = 1, minimo = 0)
 	const mascaraClara = new Mascara(peso = 2, indiceOscuridad = 0, minimo = 0)
 	const armaduraReforzada = new Armadura(10)
-	const cotaDeMalla = new RefuerzoDeCotaDeMalla(1)
+	const cotaDeMalla = new CotaDeMalla(1)
 	const armaduraMagica = new Armadura(12)
-	const hechizoPar = new HechizoComercial("el hechizo comercial", 2, 20)
-	const hechizoParRefuerzo = new RefuerzoDeHechizo()
-	const hechizoImparRefuerzo = new RefuerzoDeHechizo() //
+	const hechizoPar = hechizoComercial
 	const armadura = new Armadura(12)
-	const indep = independiente
-	const mockHnos = new Comerciante(tipo = indep)
+	const mockHnos = new Comerciante(categoria = independiente, artefactos =[mascaraOscura, mascaraClara, armaduraMagica])
 	const merlin   = new Personaje(monedas = 100, limiteDePeso = 10)
 	const ursula   = new Personaje(monedas = 100, artefactos = #{mascaraOscura, cotaDeMalla}, limiteDePeso = 200)
 	
 	fixture {
 		espadaVieja.fechaCompra(new Date(7, 5, 2016))
 		espadaComun.fechaCompra((new Date()).minusDays(50))
-		hechizoParRefuerzo.hechizoRefuerzo(hechizoPar)
-		hechizoImparRefuerzo.hechizoRefuerzo(espectroMalefico)
 		armaduraReforzada.refuerzo(cotaDeMalla)
 	}
 	test "Peso de espada vieja" {
@@ -62,12 +62,12 @@ describe "Peso de los Artefactos"{
 	}
 
 	test "Peso de Armadura con hechizo par" {
-		armaduraMagica.refuerzo(hechizoParRefuerzo)
+		armaduraMagica.refuerzo(hechizoPar)
 		assert.equals(14, armaduraMagica.calcularPeso())
 	}
 
 	test "Peso de Armadura con hechizo impar" {
-		armaduraMagica.refuerzo(hechizoImparRefuerzo)
+		armaduraMagica.refuerzo(espectroMalefico)
 		assert.equals(13, armaduraMagica.calcularPeso())
 	}
 
@@ -76,14 +76,14 @@ describe "Peso de los Artefactos"{
 	}
 	
 	test "Peso total que carga Merlín luego de comprar a Mock Hnos. la máscara clara y la oscura (sin que haya eclipse) "{
-		merlin.quiereComprarA(mockHnos, mascaraClara)
-		merlin.quiereComprarA(mockHnos, mascaraOscura)
+		merlin.adquirirArtefacto(mascaraClara, mockHnos)
+		merlin.adquirirArtefacto(mascaraOscura, mockHnos)
 		assert.equals(5,merlin.pesoTotal())
 	}
 	
 	test "Merlín le quiere comprar a Mock Hnos. la armadura con hechizo par"{
-		armaduraMagica.refuerzo(hechizoParRefuerzo)
-		assert.throwsExceptionWithMessage("No soporta el peso",merlin.quiereComprarA(mockHnos, armaduraMagica))
+		armaduraMagica.refuerzo(hechizoPar)
+		assert.throwsException({merlin.adquirirArtefacto(armaduraMagica, mockHnos)})
 	}
 	
 	test "Peso total de Ursula, luego de desprenderse de la armadura con cota de malla"{

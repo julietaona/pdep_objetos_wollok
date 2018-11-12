@@ -1,19 +1,23 @@
-import personaje.*
-import hechizos.*
-import fuerzaOscura.*
-import artefactos.*
+import personajes.personaje_class.*
+import hechizos.hechizo_class.*
+import hechizos.logo_class.*
+import hechizos.hechizos.*
+import hechizos.libroDeHechizos_class.*
+import fuerzaOscura.fuerzaOscura.*
+import artefactos.artefacto_class.*
+import artefactos.artefactos.*
+import artefactos.arma_class.*
 
 describe "Testeo armadura"{
 	const rolando = new Personaje()
 	const espadaDestino = new Arma(0)
 	const mascaraOscura = new Mascara(1, 0)
-	const espejo = new Espejo()
+	const espejo = new Espejo(0)
 	const libroDeHechizos = new LibroDeHechizos()
 	const armadura = new Armadura(poderDeLuchaBase = 2, peso = 0)
-	const cotaDeMalla = new RefuerzoDeCotaDeMalla(1)
-	const hechizoRefuerzo = new RefuerzoDeHechizo()
+	const cotaDeMalla = new CotaDeMalla(1)
 	const armaduraExtra = new Armadura(poderDeLuchaBase = 5, peso = 0)
-	const cotaDeMallaExtra = new RefuerzoDeCotaDeMalla(6)
+	const cotaDeMallaExtra = new CotaDeMalla(6)
 	
 	fixture {
 		rolando.agregarArtefactos([ collarDivino, mascaraOscura, espadaDestino, armadura, espejo ])
@@ -33,27 +37,23 @@ describe "Testeo armadura"{
 	}
 	
 	test"NL si la armadura tiene bendicion" {
-		armadura.cambiarRefuerzo(refuerzoDeBendicion)
-		assert.equals(58,armadura.habilidadDeLucha())
+		armadura.refuerzo(bendicion)
+		assert.equals(58,armadura.habilidadDeLucha(rolando))
 	}
 	
 	test"NL si tiene cota de malla"{
-		armadura.cambiarRefuerzo(cotaDeMalla)
-		assert.equals(3,armadura.habilidadDeLucha())
+		armadura.refuerzo(cotaDeMalla)
+		assert.equals(3,armadura.habilidadDeLucha(rolando))
 	}
 
 	test"NL si la armadura tiene hechizoBasico" {
-		armadura.duenio(rolando)
-		hechizoRefuerzo.hechizoRefuerzo(hechizoBasico)
-		armadura.cambiarRefuerzo(hechizoRefuerzo)
-		assert.equals(12,armadura.habilidadDeLucha())
+		armadura.refuerzo(hechizoBasico)
+		assert.equals(12,armadura.habilidadDeLucha(rolando))
 	}
 
 	test"NL si la armadura tiene espectroMalefico" {
-		armadura.duenio(rolando)
-		hechizoRefuerzo.hechizoRefuerzo(espectroMalefico)
-		armadura.cambiarRefuerzo(hechizoRefuerzo)
-		assert.equals(19,armadura.habilidadDeLucha())
+		armadura.refuerzo(espectroMalefico)
+		assert.equals(19,armadura.habilidadDeLucha(rolando))
 	}
 
 	test"NL si elimina todos los artefactos y agrego espejo" {	
@@ -71,9 +71,8 @@ describe "Testeo armadura"{
 	
 	test"NL con armadura extra de base 5 y cota de malla de base 6"{
 		rolando.agregaArtefacto(armaduraExtra)
-		armaduraExtra.cambiarRefuerzo(cotaDeMallaExtra)
+		armaduraExtra.refuerzo(cotaDeMallaExtra)
 		assert.equals(37,rolando.nivelDeHabilidadDeLucha())
-		
 	}
 	
 }

@@ -1,0 +1,67 @@
+import personajes.personaje_class.*
+import personajes.personajeNoControlado_class.*
+import hechizos.hechizo_class.*
+import hechizos.logo_class.*
+import hechizos.hechizos.*
+import fuerzaOscura.fuerzaOscura.*
+import artefactos.artefacto_class.*
+import artefactos.artefactos.*
+import artefactos.arma_class.*
+import comerciantes.comerciante_class.*
+
+describe "comercioAvanzadoDeArtefactos" {
+
+	const mascaraOscura = new Mascara(peso = 3, indiceOscuridad = 1, minimo = 0)
+	const pastoriza = new Comerciante(categoria = independiente , artefactos = [mascaraOscura])
+	const prieto = new Comerciante(categoria = registrado, artefactos = [mascaraOscura])
+	const fermepin = new Comerciante(categoria = conImpuestoALasGanacias, artefactos = [mascaraOscura])
+	const ursula = new Personaje(monedas = 100)
+	
+	fixture{
+		pastoriza.comision(9)
+		conImpuestoALasGanacias.minNoImponible(5)
+	}
+  
+	test "Total monedas de Ursula luego de comprar la máscara oscura a Pastoriza" 
+	{ 	
+    	ursula.adquirirArtefacto(mascaraOscura, pastoriza)
+		assert.equals(89.1,ursula.monedas())
+	}
+	
+	test "Total monedas de Ursula al comprar mascara oscura a Prieto" 
+        { 	
+    	   ursula.adquirirArtefacto(mascaraOscura, prieto)
+	   assert.equals(87.9,ursula.monedas())
+	}
+	
+	test "total monedas de Ursula al comprar mascara oscura a Fermepin"{
+	   ursula.adquirirArtefacto(mascaraOscura, fermepin)
+	   assert.equals(88.25,ursula.monedas())
+	}
+	
+	test "total monedas ursula al recategorizar a pastoriza y comprarle la mascara oscura"{
+	   pastoriza.recategorizacionCompulsiva()
+	   ursula.adquirirArtefacto(mascaraOscura, pastoriza)
+	   assert.equals(88.2,ursula.monedas())
+	}
+	
+	test "total monedas ursula al recategorizar 2 veces a pastoriza y comprarle la mascara oscura"{
+	   pastoriza.recategorizacionCompulsiva()
+	   pastoriza.recategorizacionCompulsiva()
+	   ursula.adquirirArtefacto(mascaraOscura, pastoriza)
+	   assert.equals(87.9,ursula.monedas())
+	}
+	
+	test "total monedas ursula al recategorizar a prieto y comprarle la mascara oscura"{
+	   prieto.recategorizacionCompulsiva()
+	   ursula.adquirirArtefacto(mascaraOscura, prieto)
+	   assert.equals(88.25,ursula.monedas())
+	}
+	
+	test "total monedas ursula al recategorizar a fermepin y comprarle la mascara oscura"{
+	   fermepin.recategorizacionCompulsiva()
+	   ursula.adquirirArtefacto(mascaraOscura, fermepin)
+	   assert.equals(88.25,ursula.monedas())
+	}
+
+}

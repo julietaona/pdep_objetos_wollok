@@ -1,7 +1,12 @@
-import personaje.*
-import hechizos.*
-import fuerzaOscura.*
-import artefactos.*
+import personajes.personaje_class.*
+import hechizos.hechizo_class.*
+import hechizos.logo_class.*
+import hechizos.hechizos.*
+import hechizos.libroDeHechizos_class.*
+import fuerzaOscura.fuerzaOscura.*
+import artefactos.artefactos.*
+import artefactos.arma_class.*
+import comerciantes.feriaDeHechiceria.*
 
 describe "comercio" {
 
@@ -11,13 +16,12 @@ describe "comercio" {
 	const loki = new Personaje(hechizoPreferido = hechizoBasico, monedas = 5)
 	const espada = new Arma(0)
 	const armaduraSinRefuerzo = new Armadura(refuerzo = sinRefuerzo,peso=0)
-	const cotaDeMalla = new RefuerzoDeCotaDeMalla(5)
+	const cotaDeMalla = new CotaDeMalla(5)
 	const armaduraConCotaDeMalla = new Armadura(refuerzo = cotaDeMalla,peso=0)
-	const armaduraConBendicion = new Armadura(refuerzo = refuerzoDeBendicion, poderDeLuchaBase = 2,peso=0)
-	const refuerzoAlacachula = new RefuerzoDeHechizo(hechizoRefuerzo = alacachulacachicomula)
-	const armaduraConAlacachula = new Armadura(refuerzo = refuerzoAlacachula, poderDeLuchaBase = 2,peso=0)
+	const armaduraConBendicion = new Armadura(refuerzo = bendicion, poderDeLuchaBase = 2,peso=0)
+	const armaduraConAlacachula = new Armadura(refuerzo = alacachulacachicomula, poderDeLuchaBase = 2,peso=0)
 	const libroDeHechizos = new LibroDeHechizos()
-	const espejo = new Espejo()
+	const espejo = new Espejo(0)
 
 	test "Precio de hechizo de logo alacachulacachimula" {
 		assert.equals(22,alacachulacachicomula.precio())
@@ -44,29 +48,29 @@ describe "comercio" {
 	}
 
 	test "Monedas de xenia luego de comprar artefactos " {
-		xenia.adquirirArtefacto(espada)
-		xenia.adquirirArtefacto(collarDivino)
-		xenia.adquirirArtefacto(armaduraSinRefuerzo)
-		xenia.adquirirArtefacto(armaduraConCotaDeMalla)
+		xenia.adquirirArtefacto(espada, feriaDeHechiceria)
+		xenia.adquirirArtefacto(collarDivino, feriaDeHechiceria)
+		xenia.adquirirArtefacto(armaduraSinRefuerzo, feriaDeHechiceria)
+		xenia.adquirirArtefacto(armaduraConCotaDeMalla, feriaDeHechiceria)
 		assert.equals(85.5,xenia.monedas())
 	}
 
 	test "Cantidad de artefactos luego de hacer varias compras" {
-		xenia.adquirirArtefacto(espada)
-		xenia.adquirirArtefacto(collarDivino)
-		xenia.adquirirArtefacto(armaduraSinRefuerzo)
-		xenia.adquirirArtefacto(armaduraConCotaDeMalla)
+		xenia.adquirirArtefacto(espada, feriaDeHechiceria)
+		xenia.adquirirArtefacto(collarDivino, feriaDeHechiceria)
+		xenia.adquirirArtefacto(armaduraSinRefuerzo, feriaDeHechiceria)
+		xenia.adquirirArtefacto(armaduraConCotaDeMalla, feriaDeHechiceria)
 		assert.equals(4,xenia.artefactos().size())
 	}
 
 	test "Monedas de thor luego de comprar artefactos" {
-		thor.adquirirArtefacto(armaduraConBendicion)
-		thor.adquirirArtefacto(armaduraConAlacachula)
+		thor.adquirirArtefacto(armaduraConBendicion, feriaDeHechiceria)
+		thor.adquirirArtefacto(armaduraConAlacachula, feriaDeHechiceria)
 		assert.equals(74,thor.monedas())
 	}
 
 	test "Loki quiere comprar el espejo, pero no le alcanza" {
-		assert.throwsExceptionWithMessage("No tiene monedas suficientes", { loki.adquirirArtefacto(espejo)})
+		assert.throwsException({ loki.adquirirArtefacto(espejo)})
 	}
 
 	test "Xenia canjea por un libro de hechizos" {
@@ -77,4 +81,3 @@ describe "comercio" {
 	}
 
 }
-

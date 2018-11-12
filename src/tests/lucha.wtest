@@ -1,19 +1,27 @@
-import personaje.*
-import hechizos.*
-import fuerzaOscura.*
-import artefactos.*
+import personajes.personaje_class.*
+import hechizos.hechizo_class.*
+import hechizos.logo_class.*
+import hechizos.hechizos.*
+import fuerzaOscura.fuerzaOscura.*
+import artefactos.artefacto_class.*
+import artefactos.artefactos.*
+import artefactos.arma_class.*
 
 describe "Testeo de Artefactos"{
+	
 	const rolando = new Personaje()
 	const espadaDestino = new Arma(0)
 	const mascaraOscura = new Mascara(1,0)
+	
 	fixture {
 		rolando.agregarArtefactos([ espadaDestino, mascaraOscura, collarDivino ])
 	}
+	
 	test"Nivel de lucha sin artefactos=1"{
 		rolando.sacarTodosLosArtefactos()
 		assert.equals(1,rolando.nivelDeHabilidadDeLucha())
 	}
+	
 	test"NL=13"{
 		assert.equals(13,rolando.nivelDeHabilidadDeLucha())
 	}
@@ -29,7 +37,7 @@ describe "Testeo de Artefactos"{
 	test"NL de Mascara Oscura con 1 eclipse =5"{
 		fuerzaOscura.eclipse()
 		assert.equals(10,fuerzaOscura.valor())
-		assert.equals(5,mascaraOscura.habilidadDeLucha())
+		assert.equals(5,mascaraOscura.habilidadDeLucha(rolando))
 	}
 	test"NL sin Mascara Oscura = 9"{
 		rolando.sacarArtefacto(mascaraOscura)
@@ -40,12 +48,12 @@ describe "Testeo de Artefactos"{
 	}
 	test "Habilidad de Lucha con Mascara NO Oscura" {
 		mascaraOscura.indiceOscuridad(0)
-		assert.equals(4,mascaraOscura.habilidadDeLucha())
+		assert.equals(4,mascaraOscura.habilidadDeLucha(rolando))
 	}
 
 	test "Habilidad de Lucha con Mascara NO Oscura y valor min 2 " {
 		mascaraOscura.indiceOscuridad(0)
 		mascaraOscura.minimo(2)
-		assert.equals(2,mascaraOscura.habilidadDeLucha())
+		assert.equals(2,mascaraOscura.habilidadDeLucha(rolando))
 	}
 }

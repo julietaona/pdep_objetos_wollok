@@ -1,21 +1,27 @@
-import personaje.*
-import hechizos.*
-import fuerzaOscura.*
-import artefactos.*
+import personajes.personaje_class.*
+import hechizos.hechizo_class.*
+import hechizos.logo_class.*
+import hechizos.hechizos.*
+import hechizos.libroDeHechizos_class.*
+import fuerzaOscura.fuerzaOscura.*
+import artefactos.artefacto_class.*
+import artefactos.artefactos.*
+import artefactos.arma_class.*
 
 describe "Test Hechiceria" {
+	
 	const rolando = new Personaje()
 	const furibunda = new Personaje()
-	const hechizoComercial = new hechizos.HechizoComercial("el hechizo comercial", 2, 20)
-	const espectroMaleficoLogo = new hechizos.Logo ("espectro Malefico",3)
 	
 	fixture {
+		espectroMalefico.multiplicador(1)
 		furibunda.hechizoPreferido(hechizoComercial)	
 	}
 	
 	test "Nivel de hechiceria=56" {
 		assert.equals(56,rolando.nivelDeHechiceria())
 	}
+	
 	test "NH con Espectro Superrecontramalefico muajajaja=125" {
 		espectroMalefico.nombreHechizo("espectro superrecontramalefico muajajaja")
 		assert.equals("espectro superrecontramalefico muajajaja",espectroMalefico.nombreHechizo())
@@ -50,6 +56,6 @@ describe "Test Hechiceria" {
 		assert.notThat(hechizoComercial.esPoderoso())
 	}
 	test "Espectro malefico es poderoso"{
-		assert.that(espectroMaleficoLogo.esPoderoso())
+		assert.that(espectroMalefico.esPoderoso())
 	}
 }
